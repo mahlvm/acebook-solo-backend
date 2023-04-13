@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router';
 import './Account.css';
 import Navbar from '../feed/navbar/Navbar';
-import {EmailForm, UsernameForm, PasswordForm} from './forms/forms.js';
+import {EmailForm, UsernameForm, PasswordForm, AvatarForm} from './forms/forms.js';
 
 const AccountPage = ({ navigate }) => {
   
@@ -12,6 +12,8 @@ const AccountPage = ({ navigate }) => {
   const [email, setEmail] = useState(false);
   const [username, setUsername] = useState(false);
   const [password, setPassword] = useState(false);
+  const [avatar, setAvatar] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const deleteAccount = () => {
     if(token) {
@@ -61,6 +63,7 @@ const AccountPage = ({ navigate }) => {
         <br></br>
             <h2>Avatar</h2>
             <img src={ userData.avatar } alt="Avatar" width="200" height="200"></img>
+            {avatar === true && <AvatarForm profilePicture={profilePicture}/>}
         <br></br>
         <br></br>   
 
@@ -69,7 +72,7 @@ const AccountPage = ({ navigate }) => {
           <button className="account-btn" onClick={() => setEmail(!email)}>Change Email</button>
           <button className="account-btn" onClick={() => setUsername(!username)}>Change Username</button>
           <button className="account-btn" onClick={() => setPassword(!password)}>Change Password</button>
-          <button className="account-btn">Change Avatar</button>
+          <button className="account-btn" onClick={() => setAvatar(!password)}>Change Avatar</button>
         </div>
 
         <br></br>

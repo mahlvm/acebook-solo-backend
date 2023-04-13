@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export const EmailForm = () => {
   return (
     <>
@@ -31,6 +32,25 @@ export const PasswordForm = () => {
         <button type="submit">Save</button>
       </form>
       <button >Forgot password?</button>
+    </>
+  )
+}
+
+export const AvatarForm = ({profilePicture}) => {
+  return (
+    <>
+      <form id='username-form'>
+            <div id="signup-profile-pic-upload-container">
+            <div id="signup-profile-pic-upload-icon">
+              <input id="profilePicture" className="form-field" type="file" accept=".png, .jpg, .jpeg" />
+              <i className="fa-regular fa-image fa-3x"></i>
+            </div>
+            <div>
+              {<p className='signup-photo-filename'>{profilePicture ? profilePicture.name : "No file chosen"}</p> }
+            </div>
+            </div>
+        <button type="submit">Save</button>
+      </form>
     </>
   )
 }
