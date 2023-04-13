@@ -9,6 +9,7 @@ const AccountPage = ({ navigate }) => {
   const { state } = useLocation();
   const userData = state.userData;
   const token = state.token;
+
   const [email, setEmail] = useState(false);
   const [username, setUsername] = useState(false);
   const [password, setPassword] = useState(false);
@@ -30,6 +31,21 @@ const AccountPage = ({ navigate }) => {
     }
   }
 
+  const changeEmail = () => {
+    fetch('/users', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: userData._id, email: email })
+    })
+    .then(response => response.json())
+        .then(data => {
+          console.log(data)
+        })
+        .catch(error => console.log(error));
+  }
+
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
@@ -48,7 +64,7 @@ const AccountPage = ({ navigate }) => {
         <h1>Account Information</h1> <br></br>
           <h2>Email</h2>
           {userData.email}
-          {email === true && <EmailForm/>}
+          {email === true && <EmailForm changeEmail={changeEmail}/>}
         <br></br>
         <br></br> 
             <h2>Username</h2>
@@ -72,7 +88,7 @@ const AccountPage = ({ navigate }) => {
           <button className="account-btn" onClick={() => setEmail(!email)}>Change Email</button>
           <button className="account-btn" onClick={() => setUsername(!username)}>Change Username</button>
           <button className="account-btn" onClick={() => setPassword(!password)}>Change Password</button>
-          <button className="account-btn" onClick={() => setAvatar(!password)}>Change Avatar</button>
+          <button className="account-btn" onClick={() => setAvatar(!avatar)}>Change Avatar</button>
         </div>
 
         <br></br>

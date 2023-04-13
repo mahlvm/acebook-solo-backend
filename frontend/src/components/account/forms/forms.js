@@ -1,10 +1,9 @@
 import React from 'react';
 
-
-export const EmailForm = () => {
+export const EmailForm = ({changeEmail}) => {
   return (
     <>
-      <form id='email-form'>
+      <form id='email-form' onSubmit={changeEmail}>
         <input placeholder="New Email" id="email" className="form-field"type='text'/>
         <button type="submit">Save</button>
       </form>
