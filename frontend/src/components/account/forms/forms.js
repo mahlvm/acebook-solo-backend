@@ -1,10 +1,17 @@
 import React from 'react';
 
 export const EmailForm = ({changeEmail}) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newEmailInput = document.getElementById('email')
+    const newEmail = newEmailInput.value;
+    changeEmail(newEmail);
+  };
+
   return (
     <>
-      <form id='email-form' onSubmit={changeEmail}>
-        <input placeholder="New Email" id="email" className="form-field"type='text'/>
+      <form id='email-form' onSubmit={handleSubmit}>
+        <input placeholder="New Email" id="email" className="form-field" type='text'/>
         <button type="submit">Save</button>
       </form>
     </>

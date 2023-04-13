@@ -31,13 +31,13 @@ const AccountPage = ({ navigate }) => {
     }
   }
 
-  const changeEmail = () => {
+    const changeEmail = (newEmail) => {
     fetch('/users', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id: userData._id, email: email })
+      body: JSON.stringify({ id: userData._id, email: newEmail })
     })
     .then(response => response.json())
         .then(data => {
