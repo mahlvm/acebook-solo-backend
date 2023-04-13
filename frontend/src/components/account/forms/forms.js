@@ -21,3 +21,16 @@ export const UsernameForm = () => {
     </>
   )
 }
+
+export const PasswordForm = () => {
+  return (
+    <>
+      <form id='password-form'>
+        <input placeholder="Current password" id="curr-password" className="form-field"type='text'/>
+        <input placeholder="New password" id="new-password" className="form-field"type='text'/>
+        <button type="submit">Save</button>
+      </form>
+      <button >Forgot password?</button>
+    </>
+  )
+}
