@@ -21,10 +21,21 @@ export const EmailForm = ({updateUser}) => {
   )
 }
 
-export const UsernameForm = () => {
+export const UsernameForm = ({updateUser}) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newUsernameInput = document.getElementById('username')
+    const newUsername = newUsernameInput.value;
+    const changeUsername = (newUsername) => {
+      updateUser('username', newUsername)
+    };
+    changeUsername(newUsername);
+  };
+
+
   return (
     <>
-      <form id='username-form'>
+      <form id='username-form' onSubmit={handleSubmit}>
         <input placeholder="New username" id="username" className="form-field"type='text'/>
         <button type="submit">Save</button>
       </form>

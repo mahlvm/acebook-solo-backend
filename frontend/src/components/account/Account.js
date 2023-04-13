@@ -71,7 +71,7 @@ const AccountPage = ({ navigate }) => {
         <br></br> 
             <h2>Username</h2>
             {userData.username}
-            {username === true && <UsernameForm/>}
+            {username === true && <UsernameForm updateUser={updateUser}/>}
         <br></br>
         <br></br>
             <h2>Password</h2>
