@@ -11,7 +11,7 @@ const Navbar = ({currentPage, logout, account, post }) => {
           <div id="navbar-btns">
             <button className="navbar-btn">Photos</button>
             {currentPage === "posts" && <button className="navbar-btn" onClick={account}>Account</button>}
-            {currentPage === "account" && <button className="navbar-btn" onClick={post}>Post</button>}
+            {currentPage === "account" && <button className="navbar-btn" onClick={post}>Posts</button>}
             <button className="navbar-btn" onClick={logout}>Logout</button>
           </div>
         </nav>

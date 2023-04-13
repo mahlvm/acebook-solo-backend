@@ -9,7 +9,6 @@ const AccountPage = ({ navigate }) => {
   const userData = state.userData;
   const token = state.token;
 
-
   const deleteAccount = () => {
     if(token) {
       fetch(`/users?id=${userData._id}`, {
@@ -37,7 +36,9 @@ const AccountPage = ({ navigate }) => {
   if(token) {
     return(
       <>
-        <Navbar currentPage="account" logout={logout} post={postPage}/>
+      <Navbar currentPage="account" logout={logout} post={postPage}/>
+      <div className="account-page">
+        
         <h1>Account Information</h1> <br></br>
           <h2>Email</h2>
           {userData.email}
@@ -46,10 +47,13 @@ const AccountPage = ({ navigate }) => {
         <br></br> 
             <h2>Username</h2>
             {userData.username}
-
-
         <br></br>
         <br></br>
+            <h2>Avatar</h2>
+            <img src={ userData.avatar } alt="Avatar" width="200" height="200"></img>
+        <br></br>
+        <br></br>   
+
 
         <div>
           <button className="account-btn">Change Email</button>
@@ -60,11 +64,10 @@ const AccountPage = ({ navigate }) => {
 
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
         <div>
           <button className="delete-btn" onClick={deleteAccount}>Delete Account</button>
         </div>
+      </div>
       </>
       
 

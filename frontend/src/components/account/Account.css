@@ -1,22 +1,35 @@
+.account-page {
+  margin: 0 auto;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
 .account-btn {
   display: inline-block;
-  padding: 10px 8px;
-  font-size: 18px;
+  padding: 12px 16px;
+  margin: 10px;
+  font-weight: bold;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   outline: none;
   color: #fff;
   background-color: #fd6d34;
-  border: 1px solid #444;
+  border: 2px solid #444;
   border-radius: 4px;
   box-shadow: 5px 5px 10px #0d330e;
-  margin-left: 10px
+  transition: background-color 0.3s ease-in-out;
 }
 
-.account-btn:hover {background-color: #e0bc2c}
+.account-btn:hover {
+  background-color: #e0bc2c;
+}
 
-.account-btn:active{
+.account-btn:active {
   background-color: #65c92b;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -26,20 +39,24 @@
   display: flex;
   align-items: center;
   background: none;
-  border: 1px solid lighten(gray, 24%);
+  border: 2px solid lighten(gray, 24%);
   height: 48px;
   padding: 0 24px 0 16px;
   letter-spacing: .25px;
   border-radius: 24px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
   color: #fff;
   background-color: #fd3434;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.delete-btn:hover {background-color: #ff0000}
+.delete-btn:hover {
+  background-color: #ff0000;
+}
 
-.delete-btn:active{
+.delete-btn:active {
   background-color: #000000;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
