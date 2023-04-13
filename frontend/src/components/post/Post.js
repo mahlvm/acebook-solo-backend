@@ -130,12 +130,11 @@ const Post = ({ post }) => {
       </div> 
 
       <div id="comments-container">
-      {comments.map(
+        {comments.map(
               (comment) => ( <div key={comment._id}> {comment.message} </div> )
-            )}
+              )}
       </div>
 
-      
     </div>
   )
 }
