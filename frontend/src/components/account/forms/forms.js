@@ -5,7 +5,7 @@ export const EmailForm = () => {
     <>
       <form id='email-form'>
         <input placeholder="New Email" id="email" className="form-field"type='text'/>
-        <button type="submit">Update</button>
+        <button type="submit">Save</button>
       </form>
     </>
   )
@@ -16,7 +16,7 @@ export const UsernameForm = () => {
     <>
       <form id='username-form'>
         <input placeholder="New username" id="username" className="form-field"type='text'/>
-        <button type="submit">Update</button>
+        <button type="submit">Save</button>
       </form>
     </>
   )
