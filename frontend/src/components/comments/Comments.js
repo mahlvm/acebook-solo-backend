@@ -49,10 +49,10 @@ const Comments = ({ comment, userData }) => {
 
           <div id="comment-inner-header">
             <h3 className="comment-owner-username">{commentOwnerData.username}</h3>
+            <article data-cy="comment" className="comment-message" key={comment._id}>{comment.message}</article>
             <time dateTime={comment.createdAt}>{humanReadableTime}</time>
           </div>
 
-          <article data-cy="comment" className="comment-message" key={comment._id}>{comment.message}</article>
      
         </div>
      

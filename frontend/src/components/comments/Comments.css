@@ -44,10 +44,30 @@
   gap: .3rem;
 }
 #comment-inner-header h3 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 #comment-inner-header time {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+}
+
+/*--------------------------*/
+/*     COMMENT CONTENT      */
+/* AVATAR - MESSAGE - TIME  */
+/*--------------------------*/
+
+#comment-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color:bisque;
+}
+
+.comment-message {
+  background-color: var(--primary-color);
+  width: 100%;
+  font-size: 2rem;
+
 }
 
 #comment-counters {
