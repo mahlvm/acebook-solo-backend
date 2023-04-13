@@ -40,11 +40,11 @@ const AccountPage = ({ navigate }) => {
       body: JSON.stringify({ id: userData._id, email: newEmail })
     })
     .then(response => response.json())
-        .then(data => {
-          console.log(data)
-        })
-        .catch(error => console.log(error));
-  }
+    .then(() => {
+      navigate('/posts')
+    })
+    .catch(error => console.log(error));
+}
 
   const logout = () => {
     window.localStorage.removeItem("token")
