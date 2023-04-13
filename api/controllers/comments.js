@@ -25,7 +25,7 @@ const CommentsController = {
 
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({comments: data, token: token });
-    }).sort({ createdAt: -1 });
+    }).sort({ createdAt: 1 });
   }
 };
 

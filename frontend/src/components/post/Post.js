@@ -5,6 +5,7 @@ const Post = ({ post }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [ownerData, setOwnerData] = useState({});
   const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState(post.likes.length);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const Post = ({ post }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setOwnerData(data.ownerData);
-        })
+        }).then(getComments())
         .catch(error => {
           console.log(error);
         });
@@ -43,10 +44,23 @@ const Post = ({ post }) => {
       body: JSON.stringify({comment: newComment})
     }).then(response => {
       setNewComment("");
+      getComments();
+      
     })
     .catch(error => {
       console.log(error);
     });
+  }
+
+  const getComments = () => {
+    fetch (`/comments/${post._id}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => response.json()).then(response => setComments(response.comments));
+
   }
 
   const handleLikes = () => {
@@ -106,15 +120,21 @@ const Post = ({ post }) => {
         <button className="post-counter" onClick={handleLikes}>
           <i className="fa-sharp fa-solid fa-heart fa-lg"></i>{likes} likes
         </button>
-        <button className="post-counter">{post.comments} comments</button>
+        <button className="post-counter">{comments.length} comments</button>
       </div>
 
       <div id="new-comments-container">
         <div className="invisible"></div>
         <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment} onChange={handleNewCommentChange} ></input>
         <button className="new-comments-submit-btn" onClick={handleSubmit}><i className="fa-regular fa-envelope fa-2x"></i></button>
-      </div>    
-      
+      </div> 
+
+      <div id="comments-container">
+        {comments.map(
+              (comment) => ( <div key={comment._id}> {comment.message} </div> )
+              )}
+      </div>
+
     </div>
   )
 }
