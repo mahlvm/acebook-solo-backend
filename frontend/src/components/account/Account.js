@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router';
 import './Account.css';
 import Navbar from '../feed/navbar/Navbar';
+import EmailForm from './forms/forms.js';
 
 const AccountPage = ({ navigate }) => {
   
   const { state } = useLocation();
   const userData = state.userData;
   const token = state.token;
+  const [emailForm, setEmailForm] = useState(false)
 
   const deleteAccount = () => {
     if(token) {
@@ -42,7 +44,7 @@ const AccountPage = ({ navigate }) => {
         <h1>Account Information</h1> <br></br>
           <h2>Email</h2>
           {userData.email}
-        
+          {emailForm === true && <EmailForm/>}
         <br></br>
         <br></br> 
             <h2>Username</h2>
@@ -56,7 +58,7 @@ const AccountPage = ({ navigate }) => {
 
 
         <div>
-          <button className="account-btn">Change Email</button>
+          <button className="account-btn" onClick={() => setEmailForm(!emailForm)}>Change Email</button>
           <button className="account-btn">Change Username</button>
           <button className="account-btn">Change Password</button>
           <button className="account-btn">Change Avatar</button>
