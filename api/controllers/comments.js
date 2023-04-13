@@ -26,7 +26,17 @@ const CommentsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({comments: data, token: token });
     }).sort({ createdAt: 1 });
-  }
+  },
+
+  GetCommentOwnerData: (req, res) => {
+    console.log('REQQQQQ', req.params)
+    Users.findById(req.params.id, async (err, data) => {
+      if (err) { throw err }
+
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({commentOwnerData: data, token: token });
+    })
+  },
 };
 
 
