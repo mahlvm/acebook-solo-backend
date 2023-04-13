@@ -51,6 +51,16 @@ const UsersController = {
         res.status(200).json({message: 'User deleted'});
       }
     })
+  },
+
+  Update: (req, res) => {
+    User.updateOne({_id: req.body.id}, {email: req.body.email}, (err, data) => {
+      if (err) {
+        res.status(400).json({message: 'Unable to update email'})
+      } else {
+        res.status(200).json({message: 'Email updated'});
+      }
+    })
   }
 
   
