@@ -53,6 +53,11 @@ const AccountPage = ({ navigate }) => {
             {username === true && <UsernameForm/>}
         <br></br>
         <br></br>
+            <h2>Password</h2>
+            ********
+
+        <br></br>
+        <br></br>
             <h2>Avatar</h2>
             <img src={ userData.avatar } alt="Avatar" width="200" height="200"></img>
         <br></br>
