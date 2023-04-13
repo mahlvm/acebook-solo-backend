@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router';
 import './Account.css';
+import Navbar from '../feed/navbar/Navbar';
 
 const AccountPage = ({ navigate }) => {
   
   const { state } = useLocation();
   const userData = state.userData;
   const token = state.token;
+
 
   const deleteAccount = () => {
     if(token) {
@@ -23,9 +25,19 @@ const AccountPage = ({ navigate }) => {
     }
   }
 
+  const logout = () => {
+    window.localStorage.removeItem("token")
+    navigate('/login')
+  }
+
+  const postPage = () => {
+    navigate('/posts')
+  }
+
   if(token) {
     return(
       <>
+        <Navbar currentPage="account" logout={logout} post={postPage}/>
         <h1>Account Information</h1> <br></br>
           <h2>Email</h2>
           {userData.email}

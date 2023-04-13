@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css'
 
-const Navbar = ({ logout, account }) => {
+const Navbar = ({currentPage, logout, account, post }) => {
   
   return (
     <>
@@ -10,7 +10,8 @@ const Navbar = ({ logout, account }) => {
           <h1>ACEBOOK</h1>
           <div id="navbar-btns">
             <button className="navbar-btn">Photos</button>
-            <button className="navbar-btn" onClick={account}>Account</button>
+            {currentPage === "posts" && <button className="navbar-btn" onClick={account}>Account</button>}
+            {currentPage === "account" && <button className="navbar-btn" onClick={post}>Post</button>}
             <button className="navbar-btn" onClick={logout}>Logout</button>
           </div>
         </nav>

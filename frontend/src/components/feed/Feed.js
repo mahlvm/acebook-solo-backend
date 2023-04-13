@@ -88,7 +88,7 @@ const Feed = ({ navigate }) => {
   if(token) {
     return(
       <>
-        <Navbar logout={logout} account={account} />
+        <Navbar currentPage="posts" logout={logout} account={account}/>
         <div id='main-container' >
           <div id="user-banner-container">
             <UserBanner userData={userData} />
