@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EmailForm = () => {
+export const EmailForm = () => {
   return (
     <>
       <form id='email-form'>
@@ -11,4 +11,13 @@ const EmailForm = () => {
   )
 }
 
-export default EmailForm;
+export const UsernameForm = () => {
+  return (
+    <>
+      <form id='username-form'>
+        <input placeholder="New username" id="username" className="form-field"type='text'/>
+        <button type="submit">Update</button>
+      </form>
+    </>
+  )
+}
