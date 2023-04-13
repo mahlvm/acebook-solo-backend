@@ -65,7 +65,6 @@ const Post = ({ post, userData }) => {
   }
 
   const handleLikes = () => {
-    console.log('clicked');
     fetch(`/posts/${post._id}/like`, {
       method: "PUT",
       headers: { 'Authorization': `Bearer ${token}` }
