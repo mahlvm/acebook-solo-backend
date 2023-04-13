@@ -31,19 +31,21 @@ const AccountPage = ({ navigate }) => {
     }
   }
 
-    const changeEmail = (newEmail) => {
-    fetch('/users', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: userData._id, email: newEmail })
-    })
-    .then(response => response.json())
-    .then(() => {
-      navigate('/posts')
-    })
-    .catch(error => console.log(error));
+    const updateUser = (field, value) => {
+      const body = { id: userData._id };
+      body[field] = value
+      fetch('/users', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+      })
+      .then(response => response.json())
+      .then(() => {
+        navigate('/posts')
+      })
+      .catch(error => console.log(error));
 }
 
   const logout = () => {
@@ -64,7 +66,7 @@ const AccountPage = ({ navigate }) => {
         <h1>Account Information</h1> <br></br>
           <h2>Email</h2>
           {userData.email}
-          {email === true && <EmailForm changeEmail={changeEmail}/>}
+          {email === true && <EmailForm updateUser={updateUser}/>}
         <br></br>
         <br></br> 
             <h2>Username</h2>

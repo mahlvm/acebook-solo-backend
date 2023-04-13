@@ -1,10 +1,13 @@
 import React from 'react';
 
-export const EmailForm = ({changeEmail}) => {
+export const EmailForm = ({updateUser}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newEmailInput = document.getElementById('email')
     const newEmail = newEmailInput.value;
+    const changeEmail = (newEmail) => {
+      updateUser('email', newEmail)
+    };
     changeEmail(newEmail);
   };
 
