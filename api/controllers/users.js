@@ -53,28 +53,40 @@ const UsersController = {
     })
   },
 
-  Update: (req, res) => {
-    const { id } = req.body
-    let updateObj = {};
+  Update: async (req, res) => {
+    const currentUser = await User.findById(req.params.userId)
 
-    if('email' in req.body) {
-      updateObj = { email: req.body.email }
-    } else if ('username' in req.body) {
-      updateObj = { username: req.body.username } 
-    } else if ('avatar' in req.body) {
-      updateObj = { avatar: req.body.avatar }
-    } 
-    else {
-      return res.status(400).json({message: 'Invalid request body'})
-    }
+    if (req.file) currentUser.avatar = `/uploads/${req.file.filename}`
 
-    User.updateOne({_id: id}, updateObj, (err, data) => {
-      if (err) {
-        res.status(400).json({message: 'Unable to update'})
-      } else {
-        res.status(200).json({message: 'Updated'});
-      }
-    })
+    currentUser.save((err) => {
+      if (err) { res.status(400).json({ message: 'Bad request' }) }
+      else { res.status(201).json({ message: 'OK' }) }
+      });
+    
+    console.log('USER', currentUser)
+    console.log('REQFILE', req.file.filename)
+    console.log('REQFILE', req.params.userId)
+    // const { id } = req.body
+    // let updateObj = {};
+
+    // if('email' in req.body) {
+    //   updateObj = { email: req.body.email }
+    // } else if ('username' in req.body) {
+    //   updateObj = { username: req.body.username } 
+    // } else if ('avatar' in req.body) {
+    //   updateObj = { avatar: req.body.avatar }
+    // } 
+    // else {
+    //   return res.status(400).json({message: 'Invalid request body'})
+    // }
+
+    // User.updateOne({_id: id}, updateObj, (err, data) => {
+    //   if (err) {
+    //     res.status(400).json({message: 'Unable to update'})
+    //   } else {
+    //     res.status(200).json({message: 'Updated'});
+    //   }
+    // })
   }
 
   

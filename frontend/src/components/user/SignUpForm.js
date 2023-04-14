@@ -13,27 +13,17 @@ const SignUpForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     if (!email || !password || !username) return
     
-
     event.preventDefault();
     
-    const theBox = makingTheBox(); 
-    axios.post('/users', theBox, requestHeaders)
+    const theBox = makingTheBox();
+    axios.post('/users', theBox, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
       .then(response => {
         if (response.status === 201) { navigate('/login') }
-        else if (response.status === 409) { 
-          setErrorMessage('Email address already exits');
-          // this else if can be removed because if 409, 
-          //the catch error is run instead so this will never run
-        }
         else { navigate('/signup') }
       })
       .catch((err) => setErrorMessage(err.response.data.message));
-  }
-  
-  const requestHeaders = {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
   }
 
   const makingTheBox = () => {

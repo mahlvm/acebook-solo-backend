@@ -3,7 +3,8 @@ import { useLocation } from 'react-router';
 import './Account.css';
 import Navbar from '../feed/navbar/Navbar';
 import Footer from '../feed/footer/Footer';
-import {EmailForm, UsernameForm, PasswordForm, AvatarForm} from './forms/forms.js';
+import { EmailForm, UsernameForm, PasswordForm } from './forms/forms.js';
+import AvatarForm from './forms/AvatarForm'
 
 const AccountPage = ({ navigate }) => {
   
@@ -11,15 +12,7 @@ const AccountPage = ({ navigate }) => {
   const userData = state.userData;
   const token = state.token;
 
-  const [email, setEmail] = useState(false);
-  const [username, setUsername] = useState(false);
-  const [password, setPassword] = useState(false);
-  const [avatar, setAvatar] = useState(false);
-
-
   const [optionSelected, setOptionSeclected] = useState("Main")
-
-  
 
   const deleteAccount = () => {
     if(token) {
@@ -44,35 +37,26 @@ const AccountPage = ({ navigate }) => {
       .catch(error => console.log(error));
     }}
 
-    const updateUser = (field, value) => {
-      const body = { id: userData._id };
-      body[field] = value
-      fetch('/users', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
-      })
-      .then(response => response.json())
-      .then(() => {
-        navigate('/posts')
-      })
-      .catch(error => console.log(error));
-      
-    }
+  const updateUser = (field, value) => {
+    const body = { id: userData._id };
+    body[field] = value
+
+    fetch('/users', {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .then(() => navigate('/posts'))
+    .catch(error => console.log(error));
+  }
 
   const logout = () => {
     window.localStorage.removeItem("token")
     navigate('/login')
   }
 
-  const post = () => {
-    navigate('/posts')
-  }
-
-
-  // console.log(menuIsVisible)
+  const post = () => navigate('/posts')
 
   if(token) {
     return(
@@ -103,9 +87,6 @@ const AccountPage = ({ navigate }) => {
                 <button className="account-page-btn" onClick={() => setOptionSeclected("Email")}>Change Email</button>
                 <button className="account-page-btn" onClick={() => setOptionSeclected("Username")}>Change Username</button>
                 <button className="account-page-btn" onClick={() => setOptionSeclected("Password")}>Change Password</button>
-                {/* <button className="account-page-btn" onClick={() => setEmail(!email)}>Change Email</button>
-                <button className="account-page-btn" onClick={() => setUsername(!username)}>Change Username</button>
-                <button className="account-page-btn" onClick={() => setPassword(!password)}>Change Password</button> */}
                 <button className="account-page-btn delete-account-btn" onClick={() => setOptionSeclected("Delete")}>Delete Account</button>
               </div>
               <div id='account-page-menu-interaction'>
@@ -131,7 +112,7 @@ const AccountPage = ({ navigate }) => {
                     <p className="info-details-title">Select a new picture:</p>
                     <p></p>
                   </div>
-                  <AvatarForm updateUser={updateUser} />
+                  <AvatarForm userData={userData} navigate={navigate} updateUser={updateUser} token={token} />
                 </div>
 
                 <div id='account-page-menu-email' className={optionSelected === "Email" ? "show-menu" : "hide-menu"}>

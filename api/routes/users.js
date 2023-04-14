@@ -7,10 +7,10 @@ const UsersController = require("../controllers/users");
 
 const upload = require('../multerSetup')
 
-router.post("/", upload.single('profilePicture'), UsersController.Create);
 router.get("/", UsersController.Index);
+router.post("/", upload.single('profilePicture'), UsersController.Create);
+router.put("/:userId", upload.single('profilePicture'), UsersController.Update);
 router.delete("/", UsersController.Delete);
-router.put("/", UsersController.Update);
 
 
 module.exports = router;

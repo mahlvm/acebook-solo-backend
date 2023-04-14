@@ -54,6 +54,7 @@ app.use("/comments", tokenChecker, commentsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
+  console.log(req)
   next(createError(404));
 });
 
