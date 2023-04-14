@@ -29,7 +29,6 @@ const CommentsController = {
   },
 
   GetCommentOwnerData: (req, res) => {
-    console.log('REQQQQQ', req.params)
     Users.findById(req.params.id, async (err, data) => {
       if (err) { throw err }
 

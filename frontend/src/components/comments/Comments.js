@@ -55,29 +55,24 @@ const Comments = ({ comment, userData }) => {
   return (
     <div id="comment-main-container">
 
-      <div id="comment-header" className={isTheOwner ? 'right' : 'left'}>
-        
+      <div id='comment-owner-and-time' className={isTheOwner ? 'right' : 'left'}>
+        <h2 id="comment-owner-username" className={isTheOwner ? 'right' : 'left'}>{commentOwnerData.username}</h2>
+        <time dateTime={comment.createdAt}>{humanReadableTime}</time>
+        <div></div>
+      </div>
+
+
+      <div id="comment-avatar-and-message" className={isTheOwner ? 'right' : 'left'}>
         <div id="comment-avatar-container">
           <img className="comment-avatar" alt="avatar" src={commentOwnerData.avatar}></img>
         </div>
-
-        <div id='comment-content'>
-
-          <div id="comment-inner-header">
-            <h3 className="comment-owner-username">{commentOwnerData.username}</h3>
-            <article data-cy="comment" className="comment-message" key={comment._id}>{comment.message}</article>
-            <time dateTime={comment.createdAt}>{humanReadableTime}</time>
-          </div>
-
-     
-        </div>
-     
+        <div id="comment-message-container">
+          <article data-cy="comment" className="comment-message" key={comment._id}>{comment.message}</article>
+        </div>    
       </div>
 
       <div id="comment-counters" className={isTheOwner ? 'right' : 'left'}>
-        <button className="comment-counter" onClick={handleLikes}>
-          <i className="fa-sharp fa-solid fa-heart fa-lg"></i>{clikes} likes
-        </button>
+        <button className="comment-counter" onClick={handleLikes}>0 likes</button>  {/* <--- method here */}
       </div>
 
     </div>
