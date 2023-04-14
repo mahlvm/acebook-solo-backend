@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+
+
 
 export const EmailForm = ({updateUser}) => {
   const handleSubmit = (event) => {
@@ -56,13 +58,33 @@ export const PasswordForm = () => {
   )
 }
 
-export const AvatarForm = ({profilePicture}) => {
+export const AvatarForm = ({updateUser}) => {
+  const [profilePicture, setProfilePicture] = useState(null);
+
+  const handleProfilePictureChange = (event) => {
+    setProfilePicture(event.target.files[0])
+  }
+  
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newAvatarInput = document.getElementById('profilePicture')
+    const newAvatar = newAvatarInput.files[0];
+    const changeAvatar = (newAvatar) => {
+      updateUser('avatar', `/${newAvatar.name}`)
+    };
+    changeAvatar(newAvatar);
+  };
+
+
+
+
   return (
     <>
-      <form id='username-form'>
+      <form id='avatar-form' onSubmit={handleSubmit}>
             <div id="signup-profile-pic-upload-container">
             <div id="signup-profile-pic-upload-icon">
-              <input id="profilePicture" className="form-field" type="file" accept=".png, .jpg, .jpeg" />
+              <input id="profilePicture" className="form-field" type="file" accept=".png, .jpg, .jpeg" onChange={handleProfilePictureChange} />
               <i className="fa-regular fa-image fa-3x"></i>
             </div>
             <div>

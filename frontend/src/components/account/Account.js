@@ -14,7 +14,7 @@ const AccountPage = ({ navigate }) => {
   const [username, setUsername] = useState(false);
   const [password, setPassword] = useState(false);
   const [avatar, setAvatar] = useState(false);
-  const [profilePicture, setProfilePicture] = useState(null);
+
 
   const deleteAccount = () => {
     if(token) {
@@ -81,7 +81,7 @@ const AccountPage = ({ navigate }) => {
         <br></br>
             <h2>Avatar</h2>
             <img src={ userData.avatar } alt="Avatar" width="200" height="200"></img>
-            {avatar === true && <AvatarForm profilePicture={profilePicture}/>}
+            {avatar === true && <AvatarForm updateUser={updateUser}/>}
         <br></br>
         <br></br>   
 
