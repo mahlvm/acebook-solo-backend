@@ -61,7 +61,10 @@ const UsersController = {
       updateObj = { email: req.body.email }
     } else if ('username' in req.body) {
       updateObj = { username: req.body.username } 
-    } else {
+    } else if ('avatar' in req.body) {
+      updateObj = { avatar: req.body.avatar }
+    } 
+    else {
       return res.status(400).json({message: 'Invalid request body'})
     }
 

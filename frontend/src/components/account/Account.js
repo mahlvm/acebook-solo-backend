@@ -15,7 +15,7 @@ const AccountPage = ({ navigate }) => {
   const [username, setUsername] = useState(false);
   const [password, setPassword] = useState(false);
   const [avatar, setAvatar] = useState(false);
-  const [profilePicture, setProfilePicture] = useState(null);
+
 
   const [optionSelected, setOptionSeclected] = useState("Main")
 
@@ -68,6 +68,7 @@ const AccountPage = ({ navigate }) => {
   if(token) {
     return(
       <>
+
         <div id='god-container'>
           <div id='navbar-container'>
             <nav id="navbar">
@@ -159,11 +160,6 @@ const AccountPage = ({ navigate }) => {
             <p className='prompt-login-text'><a href="/posts" className='prompt-login-link'>Back</a></p>
 
           </div>
-          
-
-
-
-
         <footer id='signup-footer-main-container'>
           <div id='signup-footer-inner-container'>
             <p id='signup-footer-team-name'>&#x1F525; TEAM FIRE, BABY! &#x1F525;</p>
