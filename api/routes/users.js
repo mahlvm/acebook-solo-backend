@@ -10,7 +10,7 @@ const upload = require('../multerSetup')
 router.post("/", upload.single('profilePicture'), UsersController.Create);
 router.get("/", UsersController.Index);
 router.delete("/", UsersController.Delete);
-
+router.put("/", UsersController.Update);
 
 
 module.exports = router;

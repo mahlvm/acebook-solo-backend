@@ -218,7 +218,7 @@
   border-bottom: var(--grey-color) 1px solid;
   overflow: scroll;
   padding: 2rem 2rem;
-  transition: all .3s ease;
+  transition: all .4s ease;
 }
 
 .close-comments {
@@ -227,7 +227,7 @@
   max-height: 0;
   overflow: hidden;
   padding: 0 10rem ;
-  transition: all .3s ease;
+  transition: all .4s ease;
 }
 
 .fade-out {
