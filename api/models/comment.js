@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Users = require("./user");
 const Post = require("./post");
+const { ObjectID } = require("mongodb");
 
 const CommentSchema = new mongoose.Schema({
   postId: { 
@@ -19,10 +20,10 @@ const CommentSchema = new mongoose.Schema({
     immutable: true,
     default: () => Date.now(),
   },
-  likes: {
-    type: Number,
-    default: 0,
-  },
+  likes: [{
+    type: ObjectID,
+    ref: 'Users',
+  }],
 });
 
 const Comment = mongoose.model("Comment", CommentSchema);

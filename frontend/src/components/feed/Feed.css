@@ -17,7 +17,7 @@
   --text-white: #ffffff;
   --text-black: #3d3d3d;
 
-  --shadow-color: rgb(186, 185, 185);
+  --shadow-color: rgb(175, 175, 175);
   --shadow-settings: 0px 0px 3px var(--shadow-color);
 
   --comment-grow-animation: all .4s ease-out; 
@@ -44,6 +44,10 @@ body {
 #main-container {
   margin: auto;
   max-width: var(--container-max-width);
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 /*-----------------------*/

@@ -105,8 +105,12 @@
 }
 
 #post-counters button .fa-heart {
-  padding-right: 1rem;
   color: #e00615;
+  transition: all .2s ease;
+}
+#post-counters button .fa-heart:hover {
+  transform: scale(1.2);
+  transition: all .2s ease;
 }
 
 .post-counter {
@@ -123,6 +127,7 @@
 }
 .post-counter:active {
   color: var(--post-btn-color);
+
 }
 
 /*-----------------*/
@@ -156,10 +161,12 @@
   font-size: 2rem;
   color: var(--text-black);
   transition: all .2s ease-in-out;
+  transition: var(--comment-shrink-animation); 
 }
 .new-comment-field:hover::placeholder {
   color: var(--post-btn-color-hover);
   transition: all .2s ease-in-out;
+  transition: var(--comment-shrink-animation); 
 }
 
 .new-comment-field:focus {
@@ -201,6 +208,31 @@
 }
 .new-comment-field:focus + .new-comments-submit-btn:active {
   transform: translateY(1px);
+}
+
+
+.open-comments {
+  display: flex;
+  flex-direction: column;
+  max-height: 65rem;
+  border-bottom: var(--grey-color) 1px solid;
+  overflow: scroll;
+  padding: 2rem 2rem;
+  transition: all .4s ease;
+}
+
+.close-comments {
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 10rem ;
+  transition: all .4s ease;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: all 1s ease;
 }
 
 .invisible {
