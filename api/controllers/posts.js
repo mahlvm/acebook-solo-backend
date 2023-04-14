@@ -58,7 +58,18 @@ const PostsController = {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
     }
+  },
+
+  Delete: (req, res) => {
+    Post.deleteMany({createdBy: req.query.id}, (err, data) => {
+      if (err) {
+        res.status(400).json({message: 'Unable to delete posts'})
+      } else {
+        res.status(200).json({message: 'Posts deleted'});
+      }
+    })
   }
+
 };
 
 

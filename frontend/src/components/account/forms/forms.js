@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 
-
-
 export const EmailForm = ({updateUser}) => {
   const handleSubmit = (event) => {
     event.preventDefault();

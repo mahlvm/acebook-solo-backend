@@ -60,6 +60,16 @@ const CommentsController = {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
     }
+  },
+
+  Delete: (req, res) => {
+    Comment.deleteMany({createdBy: req.query.id}, (err, data) => {
+      if (err) {
+        res.status(400).json({message: 'Unable to delete comments'})
+      } else {
+        res.status(200).json({message: 'Comments deleted'});
+      }
+    })
   }
 };
 
