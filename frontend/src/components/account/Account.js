@@ -23,18 +23,26 @@ const AccountPage = ({ navigate }) => {
 
   const deleteAccount = () => {
     if(token) {
-      fetch(`/users?id=${userData._id}`, {
+      fetch(`/comments?id=${userData._id}`, {
         headers: { 'Authorization': `Bearer ${token}` },
         method: "DELETE"
       })
-        .then(response => response.json())
-        .then(data => {
-          window.localStorage.removeItem("token")
-          navigate('/login')
+      .then(() => {
+        fetch(`/posts?id=${userData._id}`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+          method: "DELETE"
+        })})
+      .then(() => {
+        fetch(`/users?id=${userData._id}`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+          method: "DELETE"
+        })})
+      .then(() => {
+        window.localStorage.removeItem("token")
+        navigate('/login')
         })
-        .catch(error => console.log(error));
-    }
-  }
+      .catch(error => console.log(error));
+    }}
 
     const updateUser = (field, value) => {
       const body = { id: userData._id };
@@ -51,7 +59,8 @@ const AccountPage = ({ navigate }) => {
         navigate('/posts')
       })
       .catch(error => console.log(error));
-}
+      
+    }
 
   const logout = () => {
     window.localStorage.removeItem("token")
