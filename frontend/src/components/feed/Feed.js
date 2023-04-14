@@ -4,7 +4,6 @@ import axios from 'axios';
 import UserBanner from './userBanner/UserBanner';
 import Navbar from './navbar/Navbar';
 import NewPostForm from './newPostForm/NewPostForm';
-import Footer from './footer/Footer';
 import EmptyPage from './emptyPage/EmptyPage';
 
 import './Feed.css';
@@ -96,7 +95,7 @@ const Feed = ({ navigate }) => {
           </div>
           <div id='feed' role="feed">
             {posts.map(
-              (post) => (<Post post={ post } key={ post._id } /> )
+              (post) => (<Post post={ post } userData={userData} key={ post._id } /> )
             )}
           </div>
           <div>

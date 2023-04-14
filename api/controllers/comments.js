@@ -26,9 +26,43 @@ const CommentsController = {
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({comments: data, token: token });
     }).sort({ createdAt: 1 });
+  },
+
+  GetCommentOwnerData: (req, res) => {
+    console.log('REQQQQQ', req.params)
+    Users.findById(req.params.id, async (err, data) => {
+      if (err) { throw err }
+
+      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({commentOwnerData: data, token: token });
+    })
+  },
+
+  LikePost: async (req, res) => {
+    try {
+      const commentID = req.params.commentId;
+      const userID = req.user_id;
+
+      const comment = await Comment.findById(commentID);
+
+      if (!comment.likes.includes(userID)) {
+        comment.likes.push(userID);
+        await comment.save();
+      } else {
+        comment.likes.pull(userID);
+        await comment.save();
+      }
+
+      const updatedPost = await Comment.findById(commentID);
+      const updatedLikes = updatedPost.likes.length;
+
+      res.status(200).json({ message: "OK", likes: updatedLikes });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
   }
 };
-
 
 // HELPER METHODS -----------------
 

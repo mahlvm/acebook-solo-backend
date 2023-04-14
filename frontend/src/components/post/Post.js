@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import Comments from '../comments/Comments'
 import './Post.css'
 
-const Post = ({ post }) => {
+const Post = ({ post, userData }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [ownerData, setOwnerData] = useState({});
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState(post.likes.length);
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     if (token) {
@@ -44,8 +46,7 @@ const Post = ({ post }) => {
       body: JSON.stringify({comment: newComment})
     }).then(response => {
       setNewComment("");
-      getComments();
-      
+      getComments(); 
     })
     .catch(error => {
       console.log(error);
@@ -59,12 +60,11 @@ const Post = ({ post }) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
-    }).then(response => response.json()).then(response => setComments(response.comments));
-
+    }).then(response => response.json())
+      .then(response => setComments(response.comments));
   }
 
   const handleLikes = () => {
-    console.log('clicked');
     fetch(`/posts/${post._id}/like`, {
       method: "PUT",
       headers: { 'Authorization': `Bearer ${token}` }
@@ -96,6 +96,8 @@ const Post = ({ post }) => {
   let imageLocation;
   if (hasImage) { imageLocation = `/uploads/${post.image.fileName}` }
 
+
+
   return(
     <div id="post-container">
 
@@ -120,7 +122,13 @@ const Post = ({ post }) => {
         <button className="post-counter" onClick={handleLikes}>
           <i className="fa-sharp fa-solid fa-heart fa-lg"></i>{likes} likes
         </button>
-        <button className="post-counter">{comments.length} comments</button>
+        <button className="post-counter" onClick={ () => setIsVisible(!isVisible) } >{comments.length} comments</button>
+      </div>
+
+      <div id="comments-container" className={ isVisible ? 'open-comments' : 'close-comments' }>
+        {comments.map(
+          comment => (<Comments comment={comment} userData={ userData } ownerData={ownerData} key={comment._id} />)
+        )}
       </div>
 
       <div id="new-comments-container">
@@ -128,12 +136,6 @@ const Post = ({ post }) => {
         <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment} onChange={handleNewCommentChange} ></input>
         <button className="new-comments-submit-btn" onClick={handleSubmit}><i className="fa-regular fa-envelope fa-2x"></i></button>
       </div> 
-
-      <div id="comments-container">
-        {comments.map(
-              (comment) => ( <div key={comment._id}> {comment.message} </div> )
-              )}
-      </div>
 
     </div>
   )

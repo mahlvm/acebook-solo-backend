@@ -46,6 +46,10 @@ body {
   max-width: var(--container-max-width);
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /*-----------------------*/
 /*   RESPONSIVE DESIGN   */
 /*-----------------------*/
