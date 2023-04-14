@@ -6,6 +6,9 @@ const Comments = ({ comment, userData }) => {
   const [commentOwnerData, setCommentOwnerData] = useState({})
   const [clikes, setcLikes] = useState(comment.likes.length);
 
+  const hasAlreadyLikedComment = comment.likes.includes(userData._id)
+  const [hasLikedComment, setHasLikedComment] = useState(hasAlreadyLikedComment)
+
   useEffect(() => {
     if (token) {
       fetch(`/comments/owner/${comment.createdBy}`, {
@@ -42,6 +45,7 @@ const Comments = ({ comment, userData }) => {
       .then(async data => {
         const updatedLikes = data.likes;
         setcLikes(updatedLikes);
+        setHasLikedComment(!hasLikedComment)
       })
       .catch(error => {
         console.log(error);
@@ -72,7 +76,7 @@ const Comments = ({ comment, userData }) => {
       </div>
 
       <div id="comment-counters" className={isTheOwner ? 'right' : 'left'}>
-        <button className="comment-counter" onClick={handleLikes}>{clikes} like{ clikes === 0 || clikes > 1 ? "s" : "" }</button>  {/* <--- method here */}
+        <button className={hasLikedComment ? "comment-counter has-liked-comment" : "comment-counter"  } onClick={handleLikes}>{clikes} like{ clikes === 0 || clikes > 1 ? "s" : "" }</button>  {/* <--- method here */}
       </div>
 
     </div>

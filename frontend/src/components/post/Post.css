@@ -214,7 +214,7 @@
 .open-comments {
   display: flex;
   flex-direction: column;
-  max-height: 100rem;
+  max-height: 65rem;
   border-bottom: var(--grey-color) 1px solid;
   overflow: scroll;
   padding: 2rem 2rem;

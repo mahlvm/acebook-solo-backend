@@ -148,7 +148,7 @@ const Post = ({ post, userData }) => {
           <i className={hasLiked ? "fa-sharp fa-solid fa-heart fa-lg" : "fa-regular fa-heart fa-lg"}></i>
         </button>
         <button className="post-counter" onClick={handleLikes}>{likes} like{likes === 0 || likes > 1 ? "s" : "" }</button>
-        <button className="post-counter" onClick={ handleCommentBtnClick } >{comments.length} comments</button>
+        <button className="post-counter" onClick={ handleCommentBtnClick } >{comments.length} comment{comments.length === 0 || comments.length > 1 ? "s" : "" }</button>
       </div>
 
 

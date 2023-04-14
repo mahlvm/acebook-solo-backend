@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: .5rem 0;
+  margin: 1rem 0;
   transition: width 10s ease-in-out;
 }
 
@@ -122,4 +122,8 @@
 #comment-counters button:active {
   color: var(--post-btn-color);
   transition: all .1s ease-in-out;
+}
+
+.has-liked-comment {
+  color: #27b99a;
 }
