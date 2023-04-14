@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router';
 import './Account.css';
 import Navbar from '../feed/navbar/Navbar';
+import Footer from '../feed/footer/Footer';
 import {EmailForm, UsernameForm, PasswordForm, AvatarForm} from './forms/forms.js';
 
 const AccountPage = ({ navigate }) => {
@@ -15,6 +16,10 @@ const AccountPage = ({ navigate }) => {
   const [password, setPassword] = useState(false);
   const [avatar, setAvatar] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
+
+  const [optionSelected, setOptionSeclected] = useState("")
+
+  
 
   const deleteAccount = () => {
     if(token) {
@@ -53,52 +58,105 @@ const AccountPage = ({ navigate }) => {
     navigate('/login')
   }
 
-  const postPage = () => {
+  const post = () => {
     navigate('/posts')
   }
+
+
+  // console.log(menuIsVisible)
 
   if(token) {
     return(
       <>
-      <Navbar currentPage="account" logout={logout} post={postPage}/>
-      <div className="account-page">
-        
-        <h1>Account Information</h1> <br></br>
-          <h2>Email</h2>
-          {userData.email}
-          {email === true && <EmailForm updateUser={updateUser}/>}
-        <br></br>
-        <br></br> 
-            <h2>Username</h2>
-            {userData.username}
-            {username === true && <UsernameForm updateUser={updateUser}/>}
-        <br></br>
-        <br></br>
-            <h2>Password</h2>
-            ********
-            {password === true && <PasswordForm/>}
-        <br></br>
-        <br></br>
-            <h2>Avatar</h2>
-            <img src={ userData.avatar } alt="Avatar" width="200" height="200"></img>
-            {avatar === true && <AvatarForm profilePicture={profilePicture}/>}
-        <br></br>
-        <br></br>   
+        <div id='god-container'>
+          <div id='navbar-container'>
+            <nav id="navbar">
+              <h1>ACEBOOK</h1>
+              <div id="navbar-btns">
+                <button className="navbar-btn" onClick={post}>Home</button>
+                <button className="navbar-btn">Photos</button>
+                <button className="navbar-btn" onClick={logout}>Logout</button>
+              </div>
+            </nav>
+          </div>
+
+          
+          <div id='account-page-container'>
+            <h1 id='signup-title'>Account Information</h1>
+
+            <div id="account-page-form">
+              <div id='account-page-menu'>
+                <div id="account-page-img-container">
+                  <img src={ userData.avatar } alt="Avatar"></img>
+                </div>
+                <button className="account-page-btn" onClick={() => setOptionSeclected("Avatar")}>Change Avatar</button>
+                <button className="account-page-btn" onClick={() => setOptionSeclected("Email")}>Change Email</button>
+                <button className="account-page-btn" onClick={() => setOptionSeclected("Username")}>Change Username</button>
+                <button className="account-page-btn" onClick={() => setOptionSeclected("Password")}>Change Password</button>
+                {/* <button className="account-page-btn" onClick={() => setEmail(!email)}>Change Email</button>
+                <button className="account-page-btn" onClick={() => setUsername(!username)}>Change Username</button>
+                <button className="account-page-btn" onClick={() => setPassword(!password)}>Change Password</button> */}
+                <button className="account-page-btn delete-account-btn" onClick={() => setOptionSeclected("Delete")}>Delete Account</button>
+              </div>
+              <div id='account-page-menu-interaction'>
+
+                <div id='account-page-menu-avatar' className={optionSelected === "Avatar" ? "show-menu" : "hide-menu"}>
+                  <h2 className="menu-title">Profile picture</h2>
+                  <div>
+                    <p className="info-details-title">Select a new picture:</p>
+                    <p></p>
+                  </div>
+                  <AvatarForm profilePicture={profilePicture}/>
+                </div>
+
+                <div id='account-page-menu-email' className={optionSelected === "Email" ? "show-menu" : "hide-menu"}>
+                  <h2 className="menu-title">Email</h2>
+                  <div>
+                    <p className="info-details-title">My current email:</p>
+                    <p className="info-details-value">{userData.email}</p>
+                  </div>
+                  <EmailForm updateUser={updateUser} />
+                </div>
+                
+                <div id='account-page-menu-username' className={optionSelected === "Username" ? "show-menu" : "hide-menu"}>
+                  <h2 className="menu-title">Username</h2>
+                  <div>
+                    <p className="info-details-title">My current username:</p>
+                    <p className="info-details-value">{userData.username}</p>
+                  </div>
+                  <UsernameForm updateUser={updateUser} />
+                </div>
+
+                <div id='account-page-menu-password' className={optionSelected === "Password" ? "show-menu" : "hide-menu"}>
+                  <h2 className="menu-title">Password</h2>
+                  <div>
+                    <p className="info-details-title">My current password:</p>
+                    <p className="info-details-value">********</p>
+                  </div>
+                  <PasswordForm />
+                </div>
+                <div id='account-page-menu-delete' className={optionSelected === "Delete" ? "show-menu" : "hide-menu"}>
+                  <h2 className="menu-title">Are you sure?</h2>
+                  <button type="submit" className="my-account-btn red-btn" onClick={deleteAccount}>Delete</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          
 
 
-        <div>
-          <button className="account-btn" onClick={() => setEmail(!email)}>Change Email</button>
-          <button className="account-btn" onClick={() => setUsername(!username)}>Change Username</button>
-          <button className="account-btn" onClick={() => setPassword(!password)}>Change Password</button>
-          <button className="account-btn" onClick={() => setAvatar(!avatar)}>Change Avatar</button>
-        </div>
 
-        <br></br>
-        <br></br>
-        <div>
-          <button className="delete-btn" onClick={deleteAccount}>Delete Account</button>
-        </div>
+
+        <footer id='signup-footer-main-container'>
+          <div id='signup-footer-inner-container'>
+            <p id='signup-footer-team-name'>&#x1F525; TEAM FIRE, BABY! &#x1F525;</p>
+            <p id='signup-footer-team-members'>Fiona | Valeria | Samuel | Callum | Chang</p>
+            <p id='signup-footer-rights'>COPYRIGHT &copy; All rights reserved, obviously!</p>     
+          </div>
+        </footer>
       </div>
+      
       </>
       
 

@@ -1,3 +1,189 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--page-color);
+}
+
+#account-page-container {
+  height: 90rem;
+  margin: auto;
+  max-width: var(--container-max-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  /* border: #ff2a1b 1px solid; */
+}
+
+#account-page-form {
+  width: 100%;
+  height: 65rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: center; */
+  /* gap: 2rem; */
+  border-radius: 10px;
+  /* padding: 2rem 0; */
+  /* margin: 3rem; */
+  background-color: var(--primary-color);
+  box-shadow: var(--shadow-settings);  
+  /* border: #ff2a1b 1px solid; */
+  overflow: hidden;
+}
+
+#account-page-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 35%;
+  padding: 2rem;
+  gap: .5rem;
+  /* border: #ff2a1b 1px solid; */
+  background-color: var(--navbar-color);
+
+}
+
+#account-page-img-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  overflow: hidden;
+  width: 15rem;
+  height: 15rem;
+  flex-shrink: 0;
+  margin-bottom: 2rem;
+  border: var(--primary-color) 1px solid;
+}
+
+#account-page-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+ 
+}
+
+.account-page-btn {
+  width: 100%;
+  height: 5rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 900;
+  transition: all .2s ease;
+}
+.account-page-btn:hover {
+  color: var( --post-btn-color-hover);
+  transition: all .2s ease;
+}
+.account-page-btn:active {
+  color: var(--post-btn-color);
+  transition: all .2s ease;
+}
+
+.delete-account-btn {
+  color: #fe5a4e;
+  transition: all .2s ease;
+}
+.delete-account-btn:hover {
+  color: #ff2a1b ;
+  transition: all .2s ease;
+}
+
+#account-page-menu-interaction {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.show-menu {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 2rem;
+  /* border: #ff2a1b 1px solid; */
+  /* width: 100%;
+  transition: all 1s ease;
+  overflow: hidden; */
+}
+
+.menu-title {
+  font-size: 5rem;
+  margin-top: 7rem;
+ 
+}
+
+.info-details-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: .5rem;
+
+}
+.info-details-value {
+  font-size: 1.5rem;
+  font: 100;
+
+}
+
+
+.hide-menu {
+  display: none;
+  /* width: 0;
+  overflow: hidden;
+  transition: all 1s ease; */
+}
+
+.component-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+
+.component-input {
+  width: 100%;
+}
+
+
+
+.my-account-btn {
+  cursor: pointer;
+  border: 1px transparent solid;
+  border-radius: 30px;
+  background-color: var(--post-btn-color);
+
+  color: var(--text-white);
+  font-weight: 900;
+  font-size: 2rem;
+
+  width: 10rem;
+  height: 4rem;
+  transition: all .15s ease-in-out;
+}
+
+
+
 .account-page {
   margin: 0 auto;
   font-size: 16px;
@@ -60,4 +246,42 @@
   background-color: #000000;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+
+#my-account-page-profile-pic-upload-container {
+  width: 100%;
+}
+
+.red-btn {
+  background-color: #fd3434;
+}
+.red-btn:hover {
+  background-color: #d52727;
+  transform: scale(1.1);
+  transition: all .2s ease;
+}
+.red-btn:active {
+  background-color: #d52727;
+  transition: all .2s ease;
+}
+
+.change-avatar {
+  font-size: 1.8rem;
+  width: 75%;
+  height: 5rem;
+  border: none;
+  padding-left: 1.5rem;
+  border-radius: 5px;
+  background-color: var(--page-color);
+ transition: all .1s ease-in-out;
+}
+
+.change-avatar:focus {
+  outline: var(--post-btn-color-hover) 2px solid;
+  transition: outline .1s ease-in-out;
+}
+
+.change-avatar:focus::placeholder {
+  color: var(--dark-grey-color);
+  transition: all .1s ease-in-out;
 }
