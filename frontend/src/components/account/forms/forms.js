@@ -61,8 +61,8 @@ export const AvatarForm = ({profilePicture}) => {
     <>
       <form id='avatar-form' class="component-form" >
             <div id="my-account-page-profile-pic-upload-container">
-              <div id="signup-profile-pic-upload-icon">
-                <input id="profilePicture" className="form-field component-input change-avatar" type="file" accept=".png, .jpg, .jpeg" />
+              <div id="my-account-page-profile-pic-upload-icon">
+                <input id="profilePicture" className="form-field component-input" type="file" accept=".png, .jpg, .jpeg" />
                 <i className="fa-regular fa-image fa-3x"></i>
               </div>
             <div>

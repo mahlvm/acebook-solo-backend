@@ -17,7 +17,7 @@ const AccountPage = ({ navigate }) => {
   const [avatar, setAvatar] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
 
-  const [optionSelected, setOptionSeclected] = useState("")
+  const [optionSelected, setOptionSeclected] = useState("Main")
 
   
 
@@ -82,7 +82,7 @@ const AccountPage = ({ navigate }) => {
 
           
           <div id='account-page-container'>
-            <h1 id='signup-title'>Account Information</h1>
+            <h1 id='signup-title'>My account</h1>
 
             <div id="account-page-form">
               <div id='account-page-menu'>
@@ -100,6 +100,21 @@ const AccountPage = ({ navigate }) => {
               </div>
               <div id='account-page-menu-interaction'>
 
+                <div id='account-page-menu-main' className={optionSelected === "Main" ? "show-menu" : "hide-menu"}>
+                  <h2 className="menu-title">My information</h2>
+                  <div>
+                    <p className="info-details-title">My current email:</p>
+                    <p className="info-details-value">{userData.email}</p>
+                  </div>
+                  <div>
+                    <p className="info-details-title">My current username:</p>
+                    <p className="info-details-value">{userData.username}</p>
+                  </div>
+                  <div>
+                    <p className="info-details-title">My current password:</p>
+                    <p className="info-details-value">********</p>
+                  </div>
+                </div>
                 <div id='account-page-menu-avatar' className={optionSelected === "Avatar" ? "show-menu" : "hide-menu"}>
                   <h2 className="menu-title">Profile picture</h2>
                   <div>
@@ -141,6 +156,7 @@ const AccountPage = ({ navigate }) => {
                 </div>
               </div>
             </div>
+            <p className='prompt-login-text'><a href="/posts" className='prompt-login-link'>Back</a></p>
 
           </div>
           
