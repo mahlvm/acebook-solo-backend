@@ -10,6 +10,14 @@ const Post = ({ post, userData }) => {
   const [likes, setLikes] = useState(post.likes.length);
   const [isVisible, setIsVisible] = useState(false)
 
+  const hasAlreadyLiked = post.likes.includes(userData._id)
+  const [hasLiked, setHasLiked] = useState(hasAlreadyLiked)
+
+  console.log('POST', post.likes)
+  console.log('USER', userData._id)
+
+
+
   useEffect(() => {
     if (token) {
       fetch(`/posts/${post.createdBy}`, {
@@ -33,7 +41,8 @@ const Post = ({ post, userData }) => {
   }
 
   const handleSubmit = (event) => {
-    if (newComment === "") return
+    if (!newComment) return
+    setIsVisible(true)
 
     event.preventDefault();
 
@@ -74,6 +83,7 @@ const Post = ({ post, userData }) => {
       .then(async data => {
         const updatedLikes = data.likes;
         setLikes(updatedLikes);
+        setHasLiked(!hasLiked)
       })
       .catch(error => {
         console.log(error);
@@ -97,7 +107,16 @@ const Post = ({ post, userData }) => {
   let imageLocation;
   if (hasImage) { imageLocation = `/uploads/${post.image.fileName}` }
 
+  const handleCommentBtnClick = () => {
+    if (!comments.length) return
+    setIsVisible(!isVisible)
+  }
 
+  const handleBlur = () => {
+    setTimeout(() => {
+      setNewComment("")
+    }, 500)
+  }
 
   return(
     <div id="post-container">
@@ -119,23 +138,34 @@ const Post = ({ post, userData }) => {
       </div>
       </div>
 
-      <div id="post-counters">
-        <button className="post-counter" onClick={handleLikes}>
-          <i className="fa-sharp fa-solid fa-heart fa-lg"></i>{likes} likes
-        </button>
-        <button className="post-counter" onClick={ () => setIsVisible(!isVisible) } >{comments.length} comments</button>
-      </div>
-
       <div id="comments-container" className={ isVisible ? 'open-comments' : 'close-comments' }>
         {comments.map(
           comment => (<Comments comment={comment} userData={ userData } ownerData={ownerData} key={comment._id} />)
         )}
       </div>
+      
+      <div id="post-counters">
+        <button className="post-counter" onClick={handleLikes}>
+          <i className={hasLiked ? "fa-sharp fa-solid fa-heart fa-lg" : "fa-regular fa-heart fa-lg"}></i>
+        </button>
+        <button className="post-counter" onClick={handleLikes}>{likes} like{likes === 0 || likes > 1 ? "s" : "" }</button>
+        <button className="post-counter" onClick={ handleCommentBtnClick } >{comments.length} comments</button>
+      </div>
+
 
       <div id="new-comments-container">
         <div className="invisible"></div>
-        <input type='text' id='post' className="new-comment-field" placeholder="Comment" value={newComment} onChange={handleNewCommentChange} ></input>
-        <button className="new-comments-submit-btn" onClick={handleSubmit}><i className="fa-regular fa-envelope fa-2x"></i></button>
+        <input
+          type='text'
+          id='post'
+          className="new-comment-field"
+          placeholder="Comment"
+          value={newComment}
+          onChange={handleNewCommentChange}
+          onBlur={handleBlur}>
+          
+          </input>
+        <button className="new-comments-submit-btn" onClick={handleSubmit }><i className="fa-regular fa-envelope fa-2x"></i></button>
       </div> 
 
     </div>
