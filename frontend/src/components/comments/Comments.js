@@ -4,6 +4,7 @@ import './Comments.css'
 const Comments = ({ comment, userData }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [commentOwnerData, setCommentOwnerData] = useState({})
+  const [clikes, setcLikes] = useState(comment.likes.length);
 
   useEffect(() => {
     if (token) {
@@ -32,6 +33,21 @@ const Comments = ({ comment, userData }) => {
     hour12: false
   };
 
+  const handleLikes = () => {
+    fetch(`/comments/${comment._id}/like`, {
+      method: "PUT",
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(response => response.json())
+      .then(async data => {
+        const updatedLikes = data.likes;
+        setcLikes(updatedLikes);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  } 
+
   const humanReadableTime = dateObj.toLocaleString('en-GB', options).replace(/,/g, '');
 
   const isTheOwner = userData._id === commentOwnerData._id
@@ -56,7 +72,7 @@ const Comments = ({ comment, userData }) => {
       </div>
 
       <div id="comment-counters" className={isTheOwner ? 'right' : 'left'}>
-        <button className="comment-counter">0 likes</button>  {/* <--- method here */}
+        <button className="comment-counter" onClick={handleLikes}>0 likes</button>  {/* <--- method here */}
       </div>
 
     </div>

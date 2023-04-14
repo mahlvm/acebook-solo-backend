@@ -36,8 +36,32 @@ const CommentsController = {
       res.status(200).json({commentOwnerData: data, token: token });
     })
   },
-};
 
+  LikePost: async (req, res) => {
+    try {
+      const commentID = req.params.commentId;
+      const userID = req.user_id;
+
+      const comment = await Comment.findById(commentID);
+
+      if (!comment.likes.includes(userID)) {
+        comment.likes.push(userID);
+        await comment.save();
+      } else {
+        comment.likes.pull(userID);
+        await comment.save();
+      }
+
+      const updatedPost = await Comment.findById(commentID);
+      const updatedLikes = updatedPost.likes.length;
+
+      res.status(200).json({ message: "OK", likes: updatedLikes });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+};
 
 // HELPER METHODS -----------------
 
