@@ -72,7 +72,7 @@ const Comments = ({ comment, userData }) => {
       </div>
 
       <div id="comment-counters" className={isTheOwner ? 'right' : 'left'}>
-        <button className="comment-counter" onClick={handleLikes}>0 likes</button>  {/* <--- method here */}
+        <button className="comment-counter" onClick={handleLikes}>{clikes} like{ clikes === 0 || clikes > 1 ? "s" : "" }</button>  {/* <--- method here */}
       </div>
 
     </div>
