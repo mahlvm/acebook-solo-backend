@@ -122,7 +122,7 @@ const AccountPage = ({ navigate }) => {
                     <p className="info-details-title">Select a new picture:</p>
                     <p></p>
                   </div>
-                  <AvatarForm profilePicture={profilePicture}/>
+                  <AvatarForm updateUser={updateUser} />
                 </div>
 
                 <div id='account-page-menu-email' className={optionSelected === "Email" ? "show-menu" : "hide-menu"}>

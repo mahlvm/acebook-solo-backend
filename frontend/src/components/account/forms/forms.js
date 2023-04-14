@@ -81,7 +81,7 @@ export const AvatarForm = ({updateUser}) => {
 
   return (
     <>
-      <form id='avatar-form' class="component-form" >
+      <form id='avatar-form' class="component-form" onSubmit={handleSubmit}>
             <div id="my-account-page-profile-pic-upload-container">
               <div id="my-account-page-profile-pic-upload-icon">
                 <input id="profilePicture" className="form-field component-input" type="file" accept=".png, .jpg, .jpeg" onChange={handleProfilePictureChange} />
