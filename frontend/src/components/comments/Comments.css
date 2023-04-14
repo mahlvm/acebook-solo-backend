@@ -4,7 +4,6 @@
   flex-direction: column;
   margin: .5rem 0;
   transition: width 10s ease-in-out;
-    /* border: BLUE 1px solid ; */
 }
 
 /*---------------*/
@@ -26,7 +25,6 @@
 #comment-owner-username.right,
 #comment-counters.right {
   text-align: right;
-  /* border: red 1px solid ; */
 }
 
 /*------------------------*/
@@ -40,9 +38,6 @@
   gap: 2rem;
   margin: 0 7rem;
   padding: 0 2rem;
-  
-  /* border: red 1px solid ; */
-
 }
 
 #comment-owner-username {
@@ -52,7 +47,6 @@
 
 #comment-owner-and-time time{
   font-size: 1rem;
-    /* border: red 1px solid ; */
 }
 
 
@@ -70,8 +64,6 @@
   justify-content: flex-start;
   margin: .3rem 0;
   gap: 2rem;
-
-  /* border: red 1px solid ; */
 }
 
 #comment-avatar-container {
@@ -80,7 +72,6 @@
   justify-content: center;
   height: 5rem;
   width: 5rem;
-  /* border: red 1px solid ; */
 }
 #comment-avatar-container img {
   height: 100%;
@@ -88,7 +79,6 @@
   object-fit: cover;
   border:  .15rem solid #3d3d3d;
   border-radius: 50px;
-  /* border: red 1px solid ; */
 }
 
 
@@ -101,7 +91,6 @@
   border-radius: 15px;
   background-color: var(--page-color) ;
   box-shadow: var(--shadow-settings);
-  /* border: red 1px solid ; */
 }
 
 #comment-message-container .comment-message {
@@ -116,7 +105,6 @@
 #comment-counters {
   margin: 0 7rem;
   padding: 0 2rem;
-  /* border: red 1px solid ; */
 }
 
 #comment-counters button {
