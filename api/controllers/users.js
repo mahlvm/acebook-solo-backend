@@ -51,6 +51,27 @@ const UsersController = {
         res.status(200).json({message: 'User deleted'});
       }
     })
+  },
+
+  Update: (req, res) => {
+    const { id } = req.body
+    let updateObj = {};
+
+    if('email' in req.body) {
+      updateObj = { email: req.body.email }
+    } else if ('username' in req.body) {
+      updateObj = { username: req.body.username } 
+    } else {
+      return res.status(400).json({message: 'Invalid request body'})
+    }
+
+    User.updateOne({_id: id}, updateObj, (err, data) => {
+      if (err) {
+        res.status(400).json({message: 'Unable to update'})
+      } else {
+        res.status(200).json({message: 'Updated'});
+      }
+    })
   }
 
   
