@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import AWS from 'aws-sdk'
+
 import axios from 'axios';
 import './SignUp.css';
 
 import Header from '../UI/Header';
+import Card from '../UI/Card';
 
 const SignUpForm = ({ navigate }) => {
 
@@ -56,8 +59,7 @@ const SignUpForm = ({ navigate }) => {
   return (
     <div id='signup-god-container'>
       <Header />
-      <div id='signup-container'>
-          <h1 id='signup-title'>Signup</h1>
+      <Card title='Signup'>
         <form id='signup-form' onSubmit={handleSubmit}>
           
           <div id="signup-error-message-container">
@@ -82,7 +84,7 @@ const SignUpForm = ({ navigate }) => {
           
         </form>
           <p className='prompt-login-text'>Already have an account? Please <a href="/login" className='prompt-login-link'>login</a></p>
-      </div>
+      </Card>
     </div>
     );
 }

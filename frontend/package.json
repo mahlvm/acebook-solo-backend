@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
+    "aws-sdk": "^2.1391.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "cypress": "^10.7.0",

@@ -13,48 +13,6 @@ body {
   background-color: var(--page-color);
 }
 
-/* #signup-navbar-container {
-  background-color: var(--navbar-color);
-  box-shadow: var(--shadow-settings);
-  margin-bottom: 1rem;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  box-shadow: var(--shadow-settings);
-}
-
-#signup-navbar {
-  color: var(--text-white);
-  display: flex;
-  direction: row;
-  align-items: center;
-  justify-content: center;
-  max-width: var(--container-max-width);
-  gap: 5rem;
-  height: 7rem;
-  padding: 0 2rem;
-  margin: auto;
-}
-
-#signup-navbar h1 {
-  font-size: 2rem;
-} */
-
-#signup-container {
-  height: 120rem;
-  margin: auto;
-  max-width: var(--container-max-width);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-
-#signup-title {
-  font-size: 5rem;
-}
-
 #signup-form {
   width: 70%;
   height: 65rem;

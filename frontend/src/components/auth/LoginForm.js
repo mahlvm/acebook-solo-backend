@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css'
+import Header from '../UI/Header';
+import Card from '../UI/Card';
 
 const LogInForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
@@ -41,13 +43,8 @@ const LogInForm = ({ navigate }) => {
  
   return (
     <div id='signup-god-container'>
-      <div id='signup-navbar-container'>
-        <nav id="signup-navbar">
-          <h1>ACEBOOK</h1>
-        </nav>
-      </div>
-      <div id='login-container'>
-        <h1 id='signup-title'>Login</h1>
+      <Header />
+      <Card title='Login'>
         <form id='login-form' onSubmit={handleSubmit}>
           <div id="signup-error-message-container">
             {errorMessage && <p className="signup-error-message">{errorMessage}</p>}
@@ -57,14 +54,7 @@ const LogInForm = ({ navigate }) => {
           <input id='submit' className='signup-submit-btn' type="submit" value="Login" />         
         </form>
           <p className='prompt-login-text'>Don't have an account?  <a href="/signup" className='prompt-login-link'>Signup</a> now</p>
-      </div>
-      <footer id='signup-footer-main-container'>
-        <div id='signup-footer-inner-container'>
-          <p id='signup-footer-team-name'>&#x1F525; TEAM FIRE, BABY! &#x1F525;</p>
-          <p id='signup-footer-team-members'>Fiona | Valeria | Samuel | Callum | Chang</p>
-          <p id='signup-footer-rights'>COPYRIGHT &copy; All rights reserved, obviously!</p>     
-        </div>
-      </footer>
+      </Card>
     </div>
     );
 }
