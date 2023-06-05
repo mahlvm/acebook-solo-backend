@@ -13,7 +13,7 @@ body {
   background-color: var(--page-color);
 }
 
-#signup-navbar-container {
+/* #signup-navbar-container {
   background-color: var(--navbar-color);
   box-shadow: var(--shadow-settings);
   margin-bottom: 1rem;
@@ -38,7 +38,7 @@ body {
 
 #signup-navbar h1 {
   font-size: 2rem;
-}
+} */
 
 #signup-container {
   height: 120rem;

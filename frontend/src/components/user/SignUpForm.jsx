@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './SignUp.css';
 
+import Header from '../UI/Header';
+
 const SignUpForm = ({ navigate }) => {
 
   const [username, setUsername] = useState("");
@@ -53,11 +55,7 @@ const SignUpForm = ({ navigate }) => {
 
   return (
     <div id='signup-god-container'>
-      <div id='signup-navbar-container'>
-        <nav id="signup-navbar">
-          <h1>ACEBOOK</h1>
-        </nav>
-      </div>
+      <Header />
       <div id='signup-container'>
           <h1 id='signup-title'>Signup</h1>
         <form id='signup-form' onSubmit={handleSubmit}>
@@ -85,13 +83,6 @@ const SignUpForm = ({ navigate }) => {
         </form>
           <p className='prompt-login-text'>Already have an account? Please <a href="/login" className='prompt-login-link'>login</a></p>
       </div>
-      <footer id='signup-footer-main-container'>
-        <div id='signup-footer-inner-container'>
-          <p id='signup-footer-team-name'>&#x1F525; TEAM FIRE, BABY! &#x1F525;</p>
-          <p id='signup-footer-team-members'>Fiona | Valeria | Samuel | Callum | Chang</p>
-          <p id='signup-footer-rights'>COPYRIGHT &copy; All rights reserved, obviously!</p>     
-        </div>
-      </footer>
     </div>
     );
 }
