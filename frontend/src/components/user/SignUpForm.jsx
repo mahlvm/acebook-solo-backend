@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import AWS from 'aws-sdk'
+import S3ACCESS from '../../key/s3Key'
 
 import axios from 'axios';
 import './SignUp.css';
 
 import Header from '../UI/Header';
 import Card from '../UI/Card';
+
+
 
 const SignUpForm = ({ navigate }) => {
 
@@ -14,6 +17,11 @@ const SignUpForm = ({ navigate }) => {
   const [password, setPassword] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+
+  // AWS.config.update({
+  //   accessKeyId: S3ACCESS.ACCESSKEY,
+  //   secretAccessKey: S3ACCESS.SECRETACCESSKEY
+  // })
 
   const handleSubmit = async (event) => {
     if (!email || !password || !username) return
@@ -30,6 +38,10 @@ const SignUpForm = ({ navigate }) => {
       })
       .catch((err) => setErrorMessage(err.response.data.message));
   }
+
+
+
+
 
   const makingTheBox = () => {
     const box = new FormData()
