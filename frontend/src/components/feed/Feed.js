@@ -6,12 +6,9 @@ import NewPostForm from './newPostForm/NewPostForm';
 import EmptyPage from './emptyPage/EmptyPage';
 
 import React, { useEffect, useState, useContext } from 'react';
-import AuthContext from '../../context/authContext';
 import './Feed.css';
 
 const Feed = ({ navigate }) => {
-  const authContext = useContext(AuthContext)
-
   const [userData, setUserData] = useState({})
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));

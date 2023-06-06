@@ -7,15 +7,12 @@ import SubmitButton from '../Form/SubmitButton';
 import Prompt from '../Form/Prompt';
 
 import { useState, useRef, useContext } from 'react';
-import AuthContext from '../../context/authContext';
 import style from './Login.module.css'
 
 const LogInForm = ({ navigate }) => {
   const email = useRef()
   const password = useRef()
   const [errorMessage, setErrorMessage] = useState('');
-
-  const authContext = useContext(AuthContext)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,7 +29,7 @@ const LogInForm = ({ navigate }) => {
     let data = await response.json()
     if (response.status !== 201) { setErrorMessage(data.message) }
     else {
-      authContext.storeToken(data.token)
+      window.localStorage.setItem("token", data.token)
       navigate('/posts');
     }
   }
