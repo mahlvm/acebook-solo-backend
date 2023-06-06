@@ -18,13 +18,15 @@ const SignUpForm = ({ navigate }) => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = async (event) => {
-    if (!email || !password || !username) return
-    
+  const handleProfilePictureChange = (event) => {
+    setProfilePicture(event.target.files[0])
+  }
+
+  const handleSubmit = async (event) => {    
     event.preventDefault();
     
-    const theBox = makingTheBox();
-    axios.post('/users', theBox, {
+    const formData = newFormData();
+    axios.post('/users', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
       .then(response => {
@@ -34,17 +36,13 @@ const SignUpForm = ({ navigate }) => {
       .catch((err) => setErrorMessage(err.response.data.message));
   }
 
-  const makingTheBox = () => {
-    const box = new FormData()
-    box.append('username', username.current.value)
-    box.append("email", email.current.value);
-    box.append("password", password.current.value);
-    box.append("profilePicture", profilePicture)
-    return box
-  }
-
-  const handleProfilePictureChange = (event) => {
-    setProfilePicture(event.target.files[0])
+  const newFormData = () => {
+    const formData = new FormData()
+    formData.append('username', username.current.value)
+    formData.append("email", email.current.value);
+    formData.append("password", password.current.value);
+    formData.append("profilePicture", profilePicture)
+    return formData
   }
 
   return (
@@ -73,7 +71,7 @@ const SignUpForm = ({ navigate }) => {
         <Prompt message='Already have an account? Please ' href='/login' link='Login'/>
       </Card>
     </div>
-    );
+  );
 }
 
 export default SignUpForm;

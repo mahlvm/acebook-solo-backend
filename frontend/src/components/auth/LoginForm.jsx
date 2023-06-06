@@ -1,5 +1,3 @@
-import { useState, useRef } from 'react';
-import './Login.css'
 import Header from '../UI/Header';
 import Card from '../UI/Card';
 import InputForm from '../Form/InputForm';
@@ -7,35 +5,31 @@ import ErrorMessage from '../Form/ErrorMessage';
 import SubmitButton from '../Form/SubmitButton';
 import Prompt from '../Form/Prompt';
 
+import { useState, useRef } from 'react';
+import style from './Login.module.css'
+
 const LogInForm = ({ navigate }) => {
   const email = useRef()
   const password = useRef()
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event) => {
-    if (!email || !password) return
-    
     event.preventDefault();
 
     let response = await fetch( '/tokens', {
       method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: email.current.value,
         password: password.current.value
       })
     })
 
-    if (response.status === 401) {
-        setErrorMessage('Email address is incorrect. Try again!');
-    } else if (response.status === 402) {
-        setErrorMessage('Password is incorrect. Try again!');
-    } else {
-        let data = await response.json()
-        window.localStorage.setItem("token", data.token)
-        navigate('/posts');
+    let data = await response.json()
+    if (response.status !== 201) { setErrorMessage(data.message) }
+    else {
+      window.localStorage.setItem("token", data.token)
+      navigate('/posts');
     }
   }
 
@@ -43,7 +37,7 @@ const LogInForm = ({ navigate }) => {
     <div id='signup-god-container'>
       <Header />
       <Card title='Login'>
-        <form id='login-form' onSubmit={handleSubmit}>
+        <form className={style['login-form']} onSubmit={handleSubmit}>
           <ErrorMessage message={errorMessage} />
           <InputForm ref={email} input={{placeholder: 'Enter your email address', id: 'email', type: 'text'}} />
           <InputForm ref={password} input={{ placeholder: 'Enter your password', id: 'password', type: 'password' }} />
