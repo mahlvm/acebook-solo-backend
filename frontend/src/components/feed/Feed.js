@@ -10,14 +10,13 @@ import AuthContext from '../../context/authContext';
 import './Feed.css';
 
 const Feed = ({ navigate }) => {
+  const authContext = useContext(AuthContext)
+
   const [userData, setUserData] = useState({})
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState("");
   const [newImg, setNewImg] = useState(null);
-
-  const authContext = useContext(AuthContext)
-
 
   useEffect(() => {
     if(token) {
@@ -28,7 +27,7 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts); 
+          setPosts(data.posts);
           setUserData(data.user)
         })
         .catch(error => console.log(error));

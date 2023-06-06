@@ -13,8 +13,8 @@ const Post = ({ post, userData }) => {
   const hasAlreadyLiked = post.likes.includes(userData._id)
   const [hasLiked, setHasLiked] = useState(hasAlreadyLiked)
 
-  console.log('POST', post.likes)
-  console.log('USER', userData._id)
+  // console.log('POST', post.likes)
+  // console.log('USER', userData._id)
 
 
 

@@ -7,16 +7,18 @@ export const AuthContextProvider = (props) => {
 
   const storeToken = (token) => {
     window.localStorage.setItem("token", token)
+    console.log(window.localStorage.token)
   }
-
-  useEffect(() => {
-    console.log('TOKEN FROM CONTEXT', token)
-  }, [token])
-
+  const removeToken = () => {
+    window.localStorage.removeItem("token")
+    console.log(window.localStorage.token)
+  }
 
   return (
     <AuthContext.Provider value={{
+      token: token,
       storeToken: storeToken,
+      removeToken: removeToken
     }}>
       {props.children}
     </AuthContext.Provider>
