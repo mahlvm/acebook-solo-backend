@@ -1,14 +1,14 @@
-import React, { useState, useRef } from 'react';
-
-import axios from 'axios';
-import './SignUp.css';
-
+import Page from '../Layout/Page';
 import Header from '../UI/Header';
 import Card from '../UI/Card';
 import InputForm from '../Form/InputForm';
 import ErrorMessage from '../Form/ErrorMessage';
 import SubmitButton from '../Form/SubmitButton';
 import Prompt from '../Form/Prompt';
+
+import { useState, useRef } from 'react';
+import axios from 'axios';
+import './SignUp.css';
 
 const SignUpForm = ({ navigate }) => {
   const username = useRef()
@@ -46,7 +46,7 @@ const SignUpForm = ({ navigate }) => {
   }
 
   return (
-    <div id='signup-god-container'>
+    <Page>
       <Header />
       <Card title='Signup'>
         <form id='signup-form' onSubmit={handleSubmit}>
@@ -70,7 +70,7 @@ const SignUpForm = ({ navigate }) => {
         </form>
         <Prompt message='Already have an account? Please ' href='/login' link='Login'/>
       </Card>
-    </div>
+    </Page>
   );
 }
 

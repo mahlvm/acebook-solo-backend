@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router';
 import './Account.css';
 import Navbar from '../feed/navbar/Navbar';
-import Footer from '../feed/footer/Footer';
 import { EmailForm, UsernameForm, PasswordForm } from './forms/forms.js';
 import AvatarForm from './forms/AvatarForm'
+
+import Card from '../UI/Card';
+import Page from '../Layout/Page';
 
 const AccountPage = ({ navigate }) => {
   
@@ -60,7 +62,7 @@ const AccountPage = ({ navigate }) => {
 
   if(token) {
     return(
-      <>
+      <Page>
 
         <div id='god-container'>
           <div id='navbar-container'>
@@ -74,9 +76,7 @@ const AccountPage = ({ navigate }) => {
             </nav>
           </div>
 
-          
-          <div id='account-page-container'>
-            <h1 id='signup-title'>My account</h1>
+          <Card title='My account'>
 
             <div id="account-page-form">
               <div id='account-page-menu'>
@@ -149,23 +149,11 @@ const AccountPage = ({ navigate }) => {
             </div>
             <p className='prompt-login-text'><a href="/posts" className='prompt-login-link'>Back</a></p>
 
-          </div>
-        <footer id='signup-footer-main-container'>
-          <div id='signup-footer-inner-container'>
-            <p id='signup-footer-team-name'>&#x1F525; TEAM FIRE, BABY! &#x1F525;</p>
-            <p id='signup-footer-team-members'>Fiona | Valeria | Samuel | Callum | Chang</p>
-            <p id='signup-footer-rights'>COPYRIGHT &copy; All rights reserved, obviously!</p>     
-          </div>
-        </footer>
-      </div>
-      
-      </>
-      
-
+          </Card>
+        </div>
+      </Page>
     )
   }
-
-  
 }
 
 export default AccountPage;

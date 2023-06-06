@@ -1,3 +1,4 @@
+import Page from '../Layout/Page';
 import Header from '../UI/Header';
 import Card from '../UI/Card';
 import InputForm from '../Form/InputForm';
@@ -34,7 +35,7 @@ const LogInForm = ({ navigate }) => {
   }
 
   return (
-    <div id='signup-god-container'>
+    <Page>
       <Header />
       <Card title='Login'>
         <form className={style['login-form']} onSubmit={handleSubmit}>
@@ -45,7 +46,7 @@ const LogInForm = ({ navigate }) => {
         </form>
         <Prompt message="Don't have an account? please " href='/signup' link='Signup' />
       </Card>
-    </div>
+    </Page>
     );
 }
 
