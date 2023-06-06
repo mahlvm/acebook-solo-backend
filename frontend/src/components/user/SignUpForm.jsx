@@ -6,6 +6,7 @@ import './SignUp.css';
 import Header from '../UI/Header';
 import Card from '../UI/Card';
 import InputForm from '../UI/InputForm';
+import ErrorMessage from '../UI/ErrorMessage';
 
 const SignUpForm = ({ navigate }) => {
   const username = useRef()
@@ -49,10 +50,7 @@ const SignUpForm = ({ navigate }) => {
       <Header />
       <Card title='Signup'>
         <form id='signup-form' onSubmit={handleSubmit}>
-          
-          <div id="signup-error-message-container">
-            {errorMessage && <p className="signup-error-message">{errorMessage}</p>}
-          </div>
+          <ErrorMessage message={errorMessage} />
           <InputForm ref={username} input={{ placeholder: 'Username', id: 'username', type: 'text' }} />
           <InputForm ref={email} input={{placeholder: 'Email', id: 'email', type: 'text'}} />
           <InputForm ref={password} input={{placeholder: 'Password', id: 'password', type: 'password'}} />

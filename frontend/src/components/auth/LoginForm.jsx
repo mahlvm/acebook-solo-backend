@@ -3,13 +3,11 @@ import './Login.css'
 import Header from '../UI/Header';
 import Card from '../UI/Card';
 import InputForm from '../UI/InputForm';
+import ErrorMessage from '../UI/ErrorMessage';
 
 const LogInForm = ({ navigate }) => {
   const email = useRef()
   const password = useRef()
-
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
@@ -27,7 +25,7 @@ const LogInForm = ({ navigate }) => {
         password: password.current.value
       })
     })
-    
+
     if (response.status === 401) {
         setErrorMessage('Email address is incorrect. Try again!');
     } else if (response.status === 402) {
@@ -44,9 +42,7 @@ const LogInForm = ({ navigate }) => {
       <Header />
       <Card title='Login'>
         <form id='login-form' onSubmit={handleSubmit}>
-          <div id="signup-error-message-container">
-            {errorMessage && <p className="signup-error-message">{errorMessage}</p>}
-          </div>
+          <ErrorMessage message={errorMessage} />
           <InputForm ref={email} input={{placeholder: 'Enter your email address', id: 'email', type: 'text'}} />
           <InputForm ref={password} input={{placeholder: 'Enter your password', id: 'password', type: 'password'}} />
           <input id='submit' className='signup-submit-btn' type="submit" value="Login" />         

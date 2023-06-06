@@ -13,6 +13,8 @@ body {
   background-color: var(--page-color);
 }
 
+
+
 #signup-form {
   width: 70%;
   height: 65rem;
@@ -26,27 +28,6 @@ body {
   margin: 3rem;
   background-color: var(--primary-color);
   box-shadow: var(--shadow-settings);  
-}
-
-.form-field {
-  font-size: 1.8rem;
-  width: 75%;
-  height: 5rem;
-  border: none;
-  padding-left: 1.5rem;
-  border-radius: 5px;
-  background-color: var(--page-color);
- transition: all .1s ease-in-out;
-}
-
-.form-field:focus {
-  outline: var(--post-btn-color-hover) 2px solid;
-  transition: outline .1s ease-in-out;
-}
-
-.form-field:focus::placeholder {
-  color: var(--dark-grey-color);
-  transition: all .1s ease-in-out;
 }
 
 #upload-photo-text {
@@ -154,7 +135,7 @@ body {
   transition: all .15s ease-in-out;
 }
 
-#signup-error-message-container {
+/* #signup-error-message-container {
   height: 1rem;
   margin-bottom: 2rem;
 }
@@ -162,7 +143,7 @@ body {
 .signup-error-message {
   color: #ff2a1b;
   font-size: 1.3rem;
-}
+} */
 
 #signup-footer-main-container {
   background-color: var(--navbar-color);
