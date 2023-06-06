@@ -1,27 +1,19 @@
-import React, { useState } from 'react';
-import AWS from 'aws-sdk'
-import S3ACCESS from '../../key/s3Key'
+import React, { useState, useRef } from 'react';
 
 import axios from 'axios';
 import './SignUp.css';
 
 import Header from '../UI/Header';
 import Card from '../UI/Card';
-
-
+import InputForm from '../UI/InputForm';
 
 const SignUpForm = ({ navigate }) => {
+  const username = useRef()
+  const email = useRef()
+  const password = useRef()
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
-
-  // AWS.config.update({
-  //   accessKeyId: S3ACCESS.ACCESSKEY,
-  //   secretAccessKey: S3ACCESS.SECRETACCESSKEY
-  // })
 
   const handleSubmit = async (event) => {
     if (!email || !password || !username) return
@@ -39,29 +31,13 @@ const SignUpForm = ({ navigate }) => {
       .catch((err) => setErrorMessage(err.response.data.message));
   }
 
-
-
-
-
   const makingTheBox = () => {
     const box = new FormData()
-    box.append('username', username)
-    box.append("email", email);
-    box.append("password", password);
+    box.append('username', username.current.value)
+    box.append("email", email.current.value);
+    box.append("password", password.current.value);
     box.append("profilePicture", profilePicture)
     return box
-  }
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
-  }
-  
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
   }
 
   const handleProfilePictureChange = (event) => {
@@ -77,9 +53,9 @@ const SignUpForm = ({ navigate }) => {
           <div id="signup-error-message-container">
             {errorMessage && <p className="signup-error-message">{errorMessage}</p>}
           </div>
-          <input placeholder="Username" id="username" className="form-field" type="text" value={ username } onChange={handleUsernameChange} />
-          <input placeholder="Email" id="email" className="form-field"type='text' value={ email } onChange={handleEmailChange} />
-          <input placeholder="Password" id="password" className="form-field" type='password' value={password} onChange={handlePasswordChange} />
+          <InputForm ref={username} input={{ placeholder: 'Username', id: 'username', type: 'text' }} />
+          <InputForm ref={email} input={{placeholder: 'Email', id: 'email', type: 'text'}} />
+          <InputForm ref={password} input={{placeholder: 'Password', id: 'password', type: 'password'}} />
 
           <p id='upload-photo-text'>Upload a profile picture</p>
           <div id="signup-profile-pic-upload-container">
