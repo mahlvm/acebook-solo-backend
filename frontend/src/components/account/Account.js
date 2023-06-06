@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router';
 import './Account.css';
-import Navbar from '../feed/navbar/Navbar';
+
 import { EmailForm, UsernameForm, PasswordForm } from './forms/forms.js';
 import AvatarForm from './forms/AvatarForm'
 
-import Card from '../UI/Card';
 import Page from '../Layout/Page';
+import Card from '../UI/Card';
+import NavBar from '../UI/NavBar';
 
 const AccountPage = ({ navigate }) => {
   
@@ -58,14 +59,15 @@ const AccountPage = ({ navigate }) => {
     navigate('/login')
   }
 
-  const post = () => navigate('/posts')
+  const posts = () => navigate('/posts')
 
   if(token) {
     return(
       <Page>
 
         <div id='god-container'>
-          <div id='navbar-container'>
+        <NavBar currentPage='Account' posts={posts} logout={logout} />
+          {/* <div id='navbar-container'>
             <nav id="navbar">
               <h1>ACEBOOK</h1>
               <div id="navbar-btns">
@@ -74,7 +76,7 @@ const AccountPage = ({ navigate }) => {
                 <button className="navbar-btn" onClick={logout}>Logout</button>
               </div>
             </nav>
-          </div>
+          </div> */}
 
           <Card title='My account'>
 
@@ -89,6 +91,7 @@ const AccountPage = ({ navigate }) => {
                 <button className="account-page-btn" onClick={() => setOptionSeclected("Password")}>Change Password</button>
                 <button className="account-page-btn delete-account-btn" onClick={() => setOptionSeclected("Delete")}>Delete Account</button>
               </div>
+
               <div id='account-page-menu-interaction'>
 
                 <div id='account-page-menu-main' className={optionSelected === "Main" ? "show-menu" : "hide-menu"}>
@@ -106,6 +109,7 @@ const AccountPage = ({ navigate }) => {
                     <p className="info-details-value">********</p>
                   </div>
                 </div>
+
                 <div id='account-page-menu-avatar' className={optionSelected === "Avatar" ? "show-menu" : "hide-menu"}>
                   <h2 className="menu-title">Profile picture</h2>
                   <div>
@@ -141,10 +145,12 @@ const AccountPage = ({ navigate }) => {
                   </div>
                   <PasswordForm />
                 </div>
+
                 <div id='account-page-menu-delete' className={optionSelected === "Delete" ? "show-menu" : "hide-menu"}>
                   <h2 className="menu-title">Are you sure?</h2>
                   <button type="submit" className="my-account-btn red-btn" onClick={deleteAccount}>Delete</button>
                 </div>
+
               </div>
             </div>
             <p className='prompt-login-text'><a href="/posts" className='prompt-login-link'>Back</a></p>

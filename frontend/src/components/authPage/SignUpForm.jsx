@@ -1,5 +1,5 @@
 import Page from '../Layout/Page';
-import Header from '../UI/Header';
+import Header from './Header';
 import Card from '../UI/Card';
 import InputForm from '../Form/InputForm';
 import ErrorMessage from '../Form/ErrorMessage';

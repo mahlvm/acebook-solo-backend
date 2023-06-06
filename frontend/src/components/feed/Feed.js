@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import axios from 'axios';
 import UserBanner from './userBanner/UserBanner';
-import Navbar from './navbar/Navbar';
+import NavBar from '../UI/NavBar';
 import NewPostForm from './newPostForm/NewPostForm';
 import EmptyPage from './emptyPage/EmptyPage';
 
+import React, { useEffect, useState, useContext } from 'react';
+import AuthContext from '../../context/authContext';
 import './Feed.css';
 
 const Feed = ({ navigate }) => {
@@ -14,6 +15,9 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState("");
   const [newImg, setNewImg] = useState(null);
+
+  const authContext = useContext(AuthContext)
+
 
   useEffect(() => {
     if(token) {
@@ -87,7 +91,7 @@ const Feed = ({ navigate }) => {
   if(token) {
     return(
       <>
-        <Navbar currentPage="posts" logout={logout} account={account}/>
+        <NavBar currentPage='Home' logout={logout} account={account} />
         <div id='main-container' >
           <div id="user-banner-container">
             <UserBanner userData={userData} />
