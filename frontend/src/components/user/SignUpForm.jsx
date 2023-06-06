@@ -5,8 +5,10 @@ import './SignUp.css';
 
 import Header from '../UI/Header';
 import Card from '../UI/Card';
-import InputForm from '../UI/InputForm';
-import ErrorMessage from '../UI/ErrorMessage';
+import InputForm from '../Form/InputForm';
+import ErrorMessage from '../Form/ErrorMessage';
+import SubmitButton from '../Form/SubmitButton';
+import Prompt from '../Form/Prompt';
 
 const SignUpForm = ({ navigate }) => {
   const username = useRef()
@@ -66,10 +68,9 @@ const SignUpForm = ({ navigate }) => {
             </div>
           </div>
           
-          <input id='submit' className='signup-submit-btn' type="submit" value="Sign up" />
-          
+          <SubmitButton value='Sign up'/>
         </form>
-          <p className='prompt-login-text'>Already have an account? Please <a href="/login" className='prompt-login-link'>login</a></p>
+        <Prompt message='Already have an account? Please ' href='/login' link='Login'/>
       </Card>
     </div>
     );

@@ -2,8 +2,10 @@ import { useState, useRef } from 'react';
 import './Login.css'
 import Header from '../UI/Header';
 import Card from '../UI/Card';
-import InputForm from '../UI/InputForm';
-import ErrorMessage from '../UI/ErrorMessage';
+import InputForm from '../Form/InputForm';
+import ErrorMessage from '../Form/ErrorMessage';
+import SubmitButton from '../Form/SubmitButton';
+import Prompt from '../Form/Prompt';
 
 const LogInForm = ({ navigate }) => {
   const email = useRef()
@@ -44,10 +46,10 @@ const LogInForm = ({ navigate }) => {
         <form id='login-form' onSubmit={handleSubmit}>
           <ErrorMessage message={errorMessage} />
           <InputForm ref={email} input={{placeholder: 'Enter your email address', id: 'email', type: 'text'}} />
-          <InputForm ref={password} input={{placeholder: 'Enter your password', id: 'password', type: 'password'}} />
-          <input id='submit' className='signup-submit-btn' type="submit" value="Login" />         
+          <InputForm ref={password} input={{ placeholder: 'Enter your password', id: 'password', type: 'password' }} />
+          <SubmitButton value='Login'/>
         </form>
-          <p className='prompt-login-text'>Don't have an account?  <a href="/signup" className='prompt-login-link'>Signup</a> now</p>
+        <Prompt message="Don't have an account? please " href='/signup' link='Signup' />
       </Card>
     </div>
     );

@@ -13,8 +13,6 @@ body {
   background-color: var(--page-color);
 }
 
-
-
 #signup-form {
   width: 70%;
   height: 65rem;
@@ -94,154 +92,15 @@ body {
 
 }
 
-.signup-submit-btn {
-  cursor: pointer;
-  border: 1px transparent solid;
-  border-radius: 50px;
-  background-color: var(--post-btn-color);
-
-  color: var(--text-white);
-  font-weight: 900;
-  font-size: 2rem;
-
-  width: 15rem;
-  height: 5.5rem;
-  transition: all .15s ease-in-out;
-  margin: 3rem 0;
-}
-
-.signup-submit-btn:hover {
-  background-color: var(--post-btn-color-hover);
-  transform: scale(1.1);
-  transition: all .15s ease-in-out;
-}
-
-.signup-submit-btn:active {
-  transform: translateY(1px);
-}
-
-.prompt-login-text {
-  font-size: 1.5rem;
-}
-.prompt-login-link:link,
-.prompt-login-link:visited {
-  color: var(--secondary-color);
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-.prompt-login-link:hover {
-  color: var(--post-btn-color-hover);
-  transition: all .15s ease-in-out;
-}
-
-/* #signup-error-message-container {
-  height: 1rem;
-  margin-bottom: 2rem;
-}
-
-.signup-error-message {
-  color: #ff2a1b;
-  font-size: 1.3rem;
-} */
-
-#signup-footer-main-container {
-  background-color: var(--navbar-color);
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 3rem;
-  border-top: rgb(179, 179, 179) .5px solid;
-}
-
-#signup-footer-inner-container {
-  /* box-shadow: var(--shadow-settings); */
-  background-color: var(--navbar-color);
-  padding: 2rem 0;
-  max-width: var(--container-max-width);
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 20rem;
-  gap: 1rem;
-}
-
-#signup-footer-inner-container p {
-  color: var(--primary-color);
-}
-
-#signup-footer-team-name {
-  font-size: 2rem;
-  font-weight: 900;
-}
-
-#signup-footer-team-members {
-  font-size: 2rem;
-  padding-bottom: 2rem;
-}
-
-#signup-footer-rights {
-  font-size: 1.3rem;
-}
-
-@media(max-height: 1350px) {
-  #signup-footer-main-container {
-    padding: 3rem;
-  }
-  #signup-footer-inner-container {
-    height: 10rem;
-  }
-}
-
 @media(max-height: 1250px) {
   #signup-container {
     height: 110rem;
-  }
-  #signup-footer-main-container {
-    padding: 1rem;
-  }
-  #signup-footer-inner-container {
-    height: 10rem;
-  }
-  #signup-footer-team-name {
-    font-size: 1.5rem;
-    font-weight: 900;
-  }
-  
-  #signup-footer-team-members {
-    font-size: 1.5rem;
-    padding-bottom: 2rem;
-  }
-  
-  #signup-footer-rights {
-    font-size: 1rem;
   }
 }
 
 @media(max-height: 1100px) {
   #signup-container {
     height: 105rem;
-  }
-  #signup-footer-main-container {
-    padding: 1rem;
-  }
-  #signup-footer-inner-container {
-    height: 6rem;
-  }
-  #signup-footer-team-name {
-    font-size: 1.5rem;
-    font-weight: 900;
-  }
-  
-  #signup-footer-team-members {
-    font-size: 1.5rem;
-    padding-bottom: 2rem;
-  }
-  
-  #signup-footer-rights {
-    display: none;
   }
 }
 
