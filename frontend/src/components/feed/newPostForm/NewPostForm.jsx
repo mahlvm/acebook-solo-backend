@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
-import './NewPostForm.css'
+import style from './NewPostForm.module.css'
 import SubmitButton from '../../UI/SubmitButton';
+import Input from '../../UI/Input';
 
 const NewPostForm = (props) => {
-  const [newPost, setNewPost] = useState("");
+  const newPost = useRef()
   const [newImg, setNewImg] = useState(null);
 
   const handleSubmit =  (event) => {
-    if (!newPost && !newImg) return
+    if (!newPost.current.value && !newImg) return
     event.preventDefault();
 
     const formData = newFormData();
-    axios.post('/posts', formData, {
-      headers: {
-        'Authorization': `Bearer ${props.token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then(response => {
-        if (response.status === 201) { props.onNewPost() }
+    axios.post('/posts', formData, requestHeader)
+      .then(response => {
+        if (response.status === 201) {
+          props.onNewPost()
+          newPost.current.value = ''
+        }
         else { throw new Error('Failed to create post'); }
       })
       .catch(error => console.log(error));
@@ -26,13 +26,16 @@ const NewPostForm = (props) => {
 
   const newFormData = () => {
     const formData = new FormData();
-    formData.append('post', newPost);
+    formData.append('post', newPost.current.value);
     formData.append('img', newImg);
     return formData
   }
 
-  const handleNewPostChange = (e) => {
-    setNewPost(e.target.value)
+  const requestHeader = {
+    headers: {
+      'Authorization': `Bearer ${props.token}`,
+      'Content-Type': 'multipart/form-data'
+    }
   }
 
   const handleImg = (event) => {
@@ -41,14 +44,14 @@ const NewPostForm = (props) => {
 
   return (
     <>
-      <form className="new-post-form" onSubmit={handleSubmit} encType='multipart/form-data'>        
-        <input type='text' id='post' className="text-field" placeholder="What do you have in mind?" value={newPost} onChange={handleNewPostChange} />
+      <form className={style["new-post-form"]} onSubmit={handleSubmit} encType='multipart/form-data'>
+        <Input ref={ newPost } style='newMessage' input={{ placeholder: 'What do you have in mind?', id: 'post', type: 'text' }} />
         
-        <div id="upload-photo-btn-container">
-          <input type='file' className="upload-photo-btn" accept=".png, .jpg, .jpeg" id='img' onChange={handleImg} />
+        <div className={style["upload-photo-btn-container"]}>
+          <input type='file' className={style["upload-photo-btn"]} accept=".png, .jpg, .jpeg" id='img' onChange={handleImg} />
           <i className="fa-regular fa-image fa-3x"></i>
           <div>
-            {newImg ? <div id='selected-file-notification'></div> : null }
+            {newImg ? <div className={style['selected-file-notification']}></div> : null }
           </div>
         </div>
         <SubmitButton style='submit-post' value='Post' />

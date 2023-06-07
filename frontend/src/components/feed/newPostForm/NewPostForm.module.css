@@ -24,32 +24,7 @@
   transition: outline .1s ease-in-out;
 }
 
-/* .new-post-form .post-submit-btn {
-  cursor: pointer;
-  border: 1px transparent solid;
-  border-radius: 30px;
-  background-color: var(--post-btn-color);
-
-  color: var(--text-white);
-  font-weight: 900;
-  font-size: 2rem;
-
-  width: 15rem;
-  height: 5.5rem;
-  transition: all .15s ease-in-out;
-}
-
-.new-post-form .post-submit-btn:hover {
-  background-color: var(--post-btn-color-hover);
-  transform: scale(1.1);
-  transition: all .15s ease-in-out;
-}
-
-.new-post-form .post-submit-btn:active {
-  transform: translateY(1px);
-} */
-
-#upload-photo-btn-container {
+.upload-photo-btn-container {
   flex-shrink: 0;
   flex-grow: 0;
   width: 5.5rem;
@@ -61,7 +36,7 @@
   transition: all .15s ease-in-out;
 }
 
-#upload-photo-btn-container .upload-photo-btn {
+.upload-photo-btn-container .upload-photo-btn {
   position: absolute;
   top: 0;
   left: 0;
@@ -72,7 +47,7 @@
   cursor: pointer;
 }
 
-#upload-photo-btn-container i {
+.upload-photo-btn-container i {
   color: var(--primary-color);
   position: absolute;
   top: 50%;
@@ -81,16 +56,16 @@
   z-index: 2;
 }
 
-#upload-photo-btn-container:hover {
+.upload-photo-btn-container:hover {
   background-color: var(--upload-photo-hover);
   transform: scale(1.1);
 }
 
-#upload-photo-btn-container:active {
+.upload-photo-btn-container:active {
   transform: translateY(1px);
 }
 
-#selected-file-notification {
+.selected-file-notification {
   position: absolute;
   top: 0;
   right: 0;
