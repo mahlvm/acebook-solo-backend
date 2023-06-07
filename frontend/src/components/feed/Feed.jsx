@@ -18,34 +18,41 @@ const Feed = ({ navigate }) => {
   const [newImg, setNewImg] = useState(null);
 
   useEffect(() => {
-    if(token) {
-      fetch("/posts", {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-          mainContext.storeUserData(data.user)
-        })
-        .catch(error => console.log(error));
+    if (token) {
+      loadPosts()
     }
   }, [token])
 
-  // ONE METHOD TO SEND THEM ALL XP -
+  const loadPosts = () => {
+    fetch("/posts", {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(response => response.json())
+      .then(async data => {
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        setPosts(data.posts);
+        mainContext.storeUserData(data.user)
+      })
+      .catch(error => console.log(error));
+  }
 
-  const handleSubmit = (event) => {
+  const handleSubmit =  (event) => {
     if (!newPost && !newImg) return
     event.preventDefault();
 
     const formData = newFormData();
-    axios.post('/posts', formData, requestHeaders)
-      .then(response => {
-        if (response.status === 201) { reloadFeedPage() }
+    axios.post('/posts', formData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(response => {
+        if (response.status === 201) { loadPosts() }
         else { throw new Error('Failed to create post'); }
       })
       .catch(error => console.log(error));
+
   }
 
   // HELPER METHODS -----------------
@@ -57,24 +64,21 @@ const Feed = ({ navigate }) => {
     return formData
   }
 
-  const requestHeaders = {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
-    }
-  }
-
-  const reloadFeedPage = () => {
-    navigate('/posts');
-    window.location.reload(); 
-  }
-
   const handleNewPostChange = (event) => {
     setNewPost(event.target.value);
   }
 
   const handleImg = (event) => {
     setNewImg(event.target.files[0]);
+  }
+
+  const feed = () => {
+    if (posts.length === 0) { return <EmptyPage /> }
+    else {
+      return posts.map((post) => {
+        return <Post post={post} userData={mainContext.userData} key={post._id} />
+      })
+    }
   }
 
   if(token) {
@@ -86,13 +90,9 @@ const Feed = ({ navigate }) => {
             <UserBanner userData={mainContext.userData} />
             <NewPostForm newPost={newPost} newImg={newImg} handleImg={handleImg} handleNewPostChange={handleNewPostChange} handleSubmit={handleSubmit}/>
           </div>
+          
           <div id='feed' role="feed">
-            {posts.map(
-              (post) => (<Post post={ post } userData={mainContext.userData} key={ post._id } /> )
-            )}
-          </div>
-          <div>
-            {posts.length === 0 ? <EmptyPage /> : null}
+            { feed() }
           </div>
         </div>     
       </>
