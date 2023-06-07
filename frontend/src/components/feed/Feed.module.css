@@ -1,0 +1,43 @@
+.feed__container {
+  margin: auto;
+  max-width: var(--container-max-width);
+}
+
+.user-banner__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url('../../../public/default_banner.jpeg') no-repeat center center/cover ;
+  box-shadow: var(--shadow-settings);
+  height: 30vh;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0 0 3px 3px;
+}
+
+/*-----------------------*/
+/*   RESPONSIVE DESIGN   */
+/*-----------------------*/
+
+@media(max-height: 950px) {
+  .user-banner__container {
+    height: 40vh
+  }
+  }
+@media(max-height: 750px) {
+  .user-banner__container {
+    height: 50vh
+  }
+  }
+@media(max-height: 600px) {
+  .user-banner__container {
+    height: 50vh
+  }
+  }
+@media(max-height: 450px) {
+  .user-banner__container {
+    height: 10rem
+  }
+  }
+

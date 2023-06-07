@@ -1,15 +1,15 @@
-import React from 'react';
-import './UserBanner.css'
+
+import style from './UserBanner.module.css'
 
 const UserBanner = ({ userData }) => {
   
   return (
     <>
-      <div id='inner-banner-container'> 
-        <div id="user-banner-img">
+      <div className={style['user-banner__inner-container']}> 
+        <div className={style['user-banner__img']}>
           <img src={ userData.avatar }></img>
         </div>
-        <div id="user-banner-info">
+        <div className={style['user-banner__info']}>
           <h2>{ userData.username }</h2>
           <p>{ userData.email }</p>
         </div>

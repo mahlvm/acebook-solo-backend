@@ -7,7 +7,7 @@ import EmptyPage from './emptyPage/EmptyPage';
 
 import React, { useEffect, useState, useContext } from 'react';
 import MainContext from '../../context/mainContext';
-import './Feed.css';
+import style from './Feed.module.css';
 
 const Feed = ({ navigate }) => {
   const mainContext = useContext(MainContext)
@@ -85,12 +85,11 @@ const Feed = ({ navigate }) => {
     return(
       <>
         <NavBar currentPage='Home' />
-        <div id='main-container' >
-          <div id="user-banner-container">
+        <div className={style['feed__container']} >
+          <div className={style["user-banner__container"]}>
             <UserBanner userData={mainContext.userData} />
             <NewPostForm newPost={newPost} newImg={newImg} handleImg={handleImg} handleNewPostChange={handleNewPostChange} handleSubmit={handleSubmit}/>
           </div>
-          
           <div id='feed' role="feed">
             { feed() }
           </div>
