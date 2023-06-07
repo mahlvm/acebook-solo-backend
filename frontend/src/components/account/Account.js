@@ -61,20 +61,8 @@ const AccountPage = ({ navigate }) => {
   if(token) {
     return(
       <Page>
-
         <div id='god-container'>
-        <NavBar currentPage='Account' posts={posts} logout={logout} />
-          {/* <div id='navbar-container'>
-            <nav id="navbar">
-              <h1>ACEBOOK</h1>
-              <div id="navbar-btns">
-                <button className="navbar-btn" onClick={post}>Home</button>
-                <button className="navbar-btn">Photos</button>
-                <button className="navbar-btn" onClick={logout}>Logout</button>
-              </div>
-            </nav>
-          </div> */}
-
+          <NavBar currentPage='Account' />
           <Card title='My account'>
 
             <div id="account-page-form">

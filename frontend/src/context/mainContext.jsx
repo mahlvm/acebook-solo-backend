@@ -1,33 +1,38 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useNavigate } from 'react-router';
 
 const MainContext = React.createContext()
 
 export const MainContextProvider = (props) => {
   const [userData, setUserData] = useState({})
+  const navigate = useNavigate()
 
   const storeUserData = (data) => {
     setUserData(data)
   }
 
-  console.log(userData)
-  // const toPosts = () => navigate('/posts')
-
-  // const toAccount = () => {
-  //   navigate('/account', {state: { userData: userData, token: token}})
-  // }
-
-  // const logout = () => {
-  //   window.localStorage.removeItem("token")
-  //   navigate('/login')
-  // }
+  const navigateTo = {
+    posts: () => navigate('/posts'),
+    account: () => { 
+      const params = {
+        state: {
+          userData: userData,
+          token: window.localStorage.getItem("token")
+        }
+      }
+      navigate('/account', params)
+    },
+    logout: () => {
+      window.localStorage.removeItem("token")
+      navigate('/login')
+    }
+  }
 
   return (
     <MainContext.Provider value={{
       userData: userData,
-      storeUserData: storeUserData
-      // toPosts: toPosts,
-      // toAccount: toAccount,
-      // logout: logout
+      storeUserData: storeUserData,
+      navigateTo: navigateTo
     }}>
       {props.children}
     </MainContext.Provider>

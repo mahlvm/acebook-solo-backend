@@ -33,15 +33,6 @@ const Feed = ({ navigate }) => {
     }
   }, [token])
 
-  const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
-
-  const account = () => {
-    navigate('/account', {state: { userData: mainContext.userData, token: token}})
-  }
-
   // ONE METHOD TO SEND THEM ALL XP -
 
   const handleSubmit = (event) => {
@@ -89,7 +80,7 @@ const Feed = ({ navigate }) => {
   if(token) {
     return(
       <>
-        <NavBar currentPage='Home' logout={logout} account={account} />
+        <NavBar currentPage='Home' />
         <div id='main-container' >
           <div id="user-banner-container">
             <UserBanner userData={mainContext.userData} />
