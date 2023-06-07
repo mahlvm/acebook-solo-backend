@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router';
 import './Account.css';
 
@@ -11,10 +11,7 @@ import NavBar from '../UI/NavBar';
 
 const AccountPage = ({ navigate }) => {
   
-  const { state } = useLocation();
-  const userData = state.userData;
-  const token = state.token;
-
+  const { userData, token } = useLocation().state;
   const [optionSelected, setOptionSeclected] = useState("Main")
 
   const deleteAccount = () => {

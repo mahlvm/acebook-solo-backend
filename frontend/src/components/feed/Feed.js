@@ -6,10 +6,12 @@ import NewPostForm from './newPostForm/NewPostForm';
 import EmptyPage from './emptyPage/EmptyPage';
 
 import React, { useEffect, useState, useContext } from 'react';
+import MainContext from '../../context/mainContext';
 import './Feed.css';
 
 const Feed = ({ navigate }) => {
-  const [userData, setUserData] = useState({})
+  const mainContext = useContext(MainContext)
+
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState("");
@@ -25,7 +27,7 @@ const Feed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPosts(data.posts);
-          setUserData(data.user)
+          mainContext.storeUserData(data.user)
         })
         .catch(error => console.log(error));
     }
@@ -37,7 +39,7 @@ const Feed = ({ navigate }) => {
   }
 
   const account = () => {
-    navigate('/account', {state: { userData: userData, token: token}})
+    navigate('/account', {state: { userData: mainContext.userData, token: token}})
   }
 
   // ONE METHOD TO SEND THEM ALL XP -
@@ -90,12 +92,12 @@ const Feed = ({ navigate }) => {
         <NavBar currentPage='Home' logout={logout} account={account} />
         <div id='main-container' >
           <div id="user-banner-container">
-            <UserBanner userData={userData} />
+            <UserBanner userData={mainContext.userData} />
             <NewPostForm newPost={newPost} newImg={newImg} handleImg={handleImg} handleNewPostChange={handleNewPostChange} handleSubmit={handleSubmit}/>
           </div>
           <div id='feed' role="feed">
             {posts.map(
-              (post) => (<Post post={ post } userData={userData} key={ post._id } /> )
+              (post) => (<Post post={ post } userData={mainContext.userData} key={ post._id } /> )
             )}
           </div>
           <div>
