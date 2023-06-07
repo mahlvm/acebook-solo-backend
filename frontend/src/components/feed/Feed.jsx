@@ -5,7 +5,7 @@ import NavBar from '../UI/NavBar';
 import NewPostForm from './newPostForm/NewPostForm';
 import EmptyPage from './emptyPage/EmptyPage';
 
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import MainContext from '../../context/mainContext';
 import style from './Feed.module.css';
 
@@ -14,8 +14,6 @@ const Feed = ({ navigate }) => {
 
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [newPost, setNewPost] = useState("");
-  const [newImg, setNewImg] = useState(null);
 
   useEffect(() => {
     if (token) {
@@ -37,41 +35,6 @@ const Feed = ({ navigate }) => {
       .catch(error => console.log(error));
   }
 
-  const handleSubmit =  (event) => {
-    if (!newPost && !newImg) return
-    event.preventDefault();
-
-    const formData = newFormData();
-    axios.post('/posts', formData, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then(response => {
-        if (response.status === 201) { loadPosts() }
-        else { throw new Error('Failed to create post'); }
-      })
-      .catch(error => console.log(error));
-
-  }
-
-  // HELPER METHODS -----------------
-
-  const newFormData = () => {
-    const formData = new FormData();
-    formData.append('post', newPost);
-    formData.append('img', newImg);
-    return formData
-  }
-
-  const handleNewPostChange = (event) => {
-    setNewPost(event.target.value);
-  }
-
-  const handleImg = (event) => {
-    setNewImg(event.target.files[0]);
-  }
-
   const feed = () => {
     if (posts.length === 0) { return <EmptyPage /> }
     else {
@@ -88,7 +51,7 @@ const Feed = ({ navigate }) => {
         <div className={style['feed__container']} >
           <div className={style["user-banner__container"]}>
             <UserBanner userData={mainContext.userData} />
-            <NewPostForm newPost={newPost} newImg={newImg} handleImg={handleImg} handleNewPostChange={handleNewPostChange} handleSubmit={handleSubmit}/>
+            <NewPostForm onNewPost={loadPosts} token={token} />
           </div>
           <div id='feed' role="feed">
             { feed() }
@@ -97,7 +60,7 @@ const Feed = ({ navigate }) => {
       </>
     );
   } else {
-    navigate('/signin');
+    navigate('/signup');
     return null;
   }
 }

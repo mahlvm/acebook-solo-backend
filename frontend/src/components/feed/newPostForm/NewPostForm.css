@@ -24,7 +24,7 @@
   transition: outline .1s ease-in-out;
 }
 
-.new-post-form .post-submit-btn {
+/* .new-post-form .post-submit-btn {
   cursor: pointer;
   border: 1px transparent solid;
   border-radius: 30px;
@@ -47,7 +47,7 @@
 
 .new-post-form .post-submit-btn:active {
   transform: translateY(1px);
-}
+} */
 
 #upload-photo-btn-container {
   flex-shrink: 0;

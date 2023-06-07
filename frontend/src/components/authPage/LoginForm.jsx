@@ -1,12 +1,12 @@
 import Page from '../Layout/Page';
 import Header from './Header';
 import Card from '../UI/Card';
-import InputForm from '../Form/InputForm';
-import ErrorMessage from '../Form/ErrorMessage';
-import SubmitButton from '../Form/SubmitButton';
-import Prompt from '../Form/Prompt';
+import Input from '../UI/Input';
+import ErrorMessage from './ErrorMessage';
+import SubmitButton from '../UI/SubmitButton';
+import Prompt from './Prompt';
 
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import style from './Login.module.css'
 
 const LogInForm = ({ navigate }) => {
@@ -40,9 +40,9 @@ const LogInForm = ({ navigate }) => {
       <Card title='Login'>
         <form className={style['login-form']} onSubmit={handleSubmit}>
           <ErrorMessage message={errorMessage} />
-          <InputForm ref={email} input={{placeholder: 'Enter your email address', id: 'email', type: 'text'}} />
-          <InputForm ref={password} input={{ placeholder: 'Enter your password', id: 'password', type: 'password' }} />
-          <SubmitButton value='Login'/>
+          <Input ref={email} style='form' input={{placeholder: 'Enter your email address', id: 'email', type: 'text'}} />
+          <Input ref={password} style='form' input={{ placeholder: 'Enter your password', id: 'password', type: 'password'} } />
+          <SubmitButton style='submit-form' value='Login'/>
         </form>
         <Prompt message="Don't have an account? please " href='/signup' link='Signup' />
       </Card>

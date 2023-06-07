@@ -1,0 +1,50 @@
+.submit-form {
+  cursor: pointer;
+  border: 1px transparent solid;
+  border-radius: 50px;
+  background-color: var(--post-btn-color);
+
+  color: var(--text-white);
+  font-weight: 900;
+  font-size: 2rem;
+
+  width: 15rem;
+  height: 5.5rem;
+  transition: all .15s ease-in-out;
+  margin: 3rem 0;
+}
+
+.submit-form:hover {
+  background-color: var(--post-btn-color-hover);
+  transform: scale(1.1);
+  transition: all .15s ease-in-out;
+}
+
+.submit-form:active {
+  transform: translateY(1px);
+}
+
+.submit-post {
+  cursor: pointer;
+  border: 1px transparent solid;
+  border-radius: 30px;
+  background-color: var(--post-btn-color);
+
+  color: var(--text-white);
+  font-weight: 900;
+  font-size: 2rem;
+
+  width: 15rem;
+  height: 5.5rem;
+  transition: all .15s ease-in-out;
+}
+
+.submit-post:hover {
+  background-color: var(--post-btn-color-hover);
+  transform: scale(1.1);
+  transition: all .15s ease-in-out;
+}
+
+.submit-post:active {
+  transform: translateY(1px);
+}

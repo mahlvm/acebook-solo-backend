@@ -1,10 +1,10 @@
 import Page from '../Layout/Page';
 import Header from './Header';
 import Card from '../UI/Card';
-import InputForm from '../Form/InputForm';
-import ErrorMessage from '../Form/ErrorMessage';
-import SubmitButton from '../Form/SubmitButton';
-import Prompt from '../Form/Prompt';
+import Input from '../UI/Input';
+import ErrorMessage from './ErrorMessage';
+import SubmitButton from '../UI/SubmitButton';
+import Prompt from './Prompt';
 
 import { useState, useRef } from 'react';
 import axios from 'axios';
@@ -51,9 +51,9 @@ const SignUpForm = ({ navigate }) => {
       <Card title='Signup'>
         <form id='signup-form' onSubmit={handleSubmit}>
           <ErrorMessage message={errorMessage} />
-          <InputForm ref={username} input={{ placeholder: 'Username', id: 'username', type: 'text' }} />
-          <InputForm ref={email} input={{placeholder: 'Email', id: 'email', type: 'text'}} />
-          <InputForm ref={password} input={{placeholder: 'Password', id: 'password', type: 'password'}} />
+          <Input ref={username} style='form' input={{ placeholder: 'Username', id: 'username', type: 'text' }} />
+          <Input ref={email} style='form' input={{placeholder: 'Email', id: 'email', type: 'text'}} />
+          <Input ref={password} style='form' input={{placeholder: 'Password', id: 'password', type: 'password'}} />
 
           <p id='upload-photo-text'>Upload a profile picture</p>
           <div id="signup-profile-pic-upload-container">
@@ -66,7 +66,7 @@ const SignUpForm = ({ navigate }) => {
             </div>
           </div>
           
-          <SubmitButton value='Sign up'/>
+          <SubmitButton style='submit-form' value='Sign up'/>
         </form>
         <Prompt message='Already have an account? Please ' href='/login' link='Login'/>
       </Card>
