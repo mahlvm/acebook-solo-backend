@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Comments from '../comments/Comments'
 import './Post.css'
+import PostHeader from './PostHeader';
 
 const Post = ({ post, userData }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -82,20 +83,7 @@ const Post = ({ post, userData }) => {
       .catch(error => {
         console.log(error);
       });
-  }  
-
-  const dateObj = new Date(post.createdAt)
-  const options = {
-    weekday: 'long',
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  };
-
-  const humanReadableTime = dateObj.toLocaleString('en-GB', options).replace(/,/g, '');
+  }
 
   const hasImage = 'image' in post // boolean: check if post has an image
   let imageLocation;
@@ -114,16 +102,7 @@ const Post = ({ post, userData }) => {
 
   return(
     <div id="post-container">
-
-      <div id="post-header">
-        <div id="post-avatar-container">
-          <img className="post-avatar" alt="avatar" src={ownerData.avatar}></img>
-        </div>
-        <div id="post-inner-header">
-          <h3 className="post-owner-username">{ownerData.username}</h3>
-          <time dateTime={post.createdAt}>{humanReadableTime}</time>
-        </div>
-      </div>
+      <PostHeader ownerData={ownerData} post={post} />
 
       <div id='post-content'>
         <article data-cy="post" className="post-message" key={post._id}>{post.message}</article>
