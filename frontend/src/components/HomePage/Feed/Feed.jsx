@@ -1,5 +1,5 @@
 import EmptyPage from '../EmptyPage';
-import Post from '../../post/Post';
+import Post from '../../Post/Post';
 import MainContext from '../../../context/mainContext';
 
 import { useContext } from 'react';

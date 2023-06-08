@@ -1,5 +1,5 @@
-import LoginForm from '../authPage/LoginForm'
-import SignUpForm from '../authPage/SignUpForm'
+import LoginForm from '../AuthPage/LoginForm'
+import SignUpForm from '../AuthPage/SignUpForm'
 import AccountPage from '../account/Account';
 import Feed from '../HomePage/HomePage'
 

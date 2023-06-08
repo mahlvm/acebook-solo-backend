@@ -9,6 +9,7 @@ const UserBanner = ({ userData }) => {
         <div className={style['user-banner__img']}>
           <img src={ userData.avatar }></img>
         </div>
+
         <div className={style['user-banner__info']}>
           <h2>{ userData.username }</h2>
           <p>{ userData.email }</p>
