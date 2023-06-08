@@ -1,4 +1,4 @@
-import Post from '../Post'
+import Post from '../../Post'
 
 describe("Post", () => {
   it('renders a post with a message', () => {

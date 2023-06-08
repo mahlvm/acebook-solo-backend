@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Comments from '../comments/Comments'
+import Comments from '../Comments/Comments'
 import './Post.css'
 import PostHeader from './PostHeader';
+import PostContent from './PostContent';
+import CommentSection from '../Comments/CommentSection';
+import NewCommentInput from '../Comments/NewCommentInput';
 
 const Post = ({ post, userData }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [ownerData, setOwnerData] = useState({});
-  const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState(post.likes.length);
   const [isVisible, setIsVisible] = useState(false)
@@ -24,38 +26,16 @@ const Post = ({ post, userData }) => {
           window.localStorage.setItem("token", data.token);
           setToken(window.localStorage.getItem("token"));
           setOwnerData(data.ownerData);
-        }).then(getComments())
+          getComments()
+        })
         .catch(error => {
           console.log(error);
         });
     }
   }, [token]);
 
-
-  const handleNewCommentChange = (event) => {
-    setNewComment(event.target.value);
-  }
-
-  const handleSubmit = (event) => {
-    if (!newComment) return
-    setIsVisible(true)
-
-    event.preventDefault();
-
-    fetch (`/comments/${post._id}`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({comment: newComment})
-    }).then(response => {
-      setNewComment("");
-      getComments(); 
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  const toggleComments = (value = !isVisible) => {
+    setIsVisible(value)
   }
 
   const getComments = () => {
@@ -85,62 +65,21 @@ const Post = ({ post, userData }) => {
       });
   }
 
-  const hasImage = 'image' in post // boolean: check if post has an image
-  let imageLocation;
-  if (hasImage) { imageLocation = `/uploads/${post.image.fileName}` }
-
-  const handleCommentBtnClick = () => {
-    if (!comments.length) return
-    setIsVisible(!isVisible)
-  }
-
-  const handleBlur = () => {
-    setTimeout(() => {
-      setNewComment("")
-    }, 500)
-  }
-
   return(
     <div id="post-container">
       <PostHeader ownerData={ownerData} post={post} />
-
-      <div id='post-content'>
-        <article data-cy="post" className="post-message" key={post._id}>{post.message}</article>
-        <div id="post-content-image">
-        {hasImage ? <img src={imageLocation}></img> : null }
-      </div>
-      </div>
-
-      <div id="comments-container" className={ isVisible ? 'open-comments' : 'close-comments' }>
-        {comments.map(
-          comment => (<Comments comment={comment} userData={ userData } ownerData={ownerData} key={comment._id} />)
-        )}
-      </div>
+      <PostContent post={post} />
+      <CommentSection ownerData={ownerData} comments={comments} isVisible={isVisible}/>
       
       <div id="post-counters">
         <button className="post-counter" onClick={handleLikes}>
           <i className={hasLiked ? "fa-sharp fa-solid fa-heart fa-lg" : "fa-regular fa-heart fa-lg"}></i>
         </button>
         <button className="post-counter" onClick={handleLikes}>{likes} like{likes === 0 || likes > 1 ? "s" : "" }</button>
-        <button className="post-counter" onClick={ handleCommentBtnClick } >{comments.length} comment{comments.length === 0 || comments.length > 1 ? "s" : "" }</button>
+        <button className="post-counter" onClick={() => toggleComments()} >{comments.length} comment{comments.length === 0 || comments.length > 1 ? "s" : "" }</button>
       </div>
 
-
-      <div id="new-comments-container">
-        <div className="invisible"></div>
-        <input
-          type='text'
-          id='post'
-          className="new-comment-field"
-          placeholder="Comment"
-          value={newComment}
-          onChange={handleNewCommentChange}
-          onBlur={handleBlur}>
-          
-          </input>
-        <button className="new-comments-submit-btn" onClick={handleSubmit }><i className="fa-regular fa-envelope fa-2x"></i></button>
-      </div> 
-
+      <NewCommentInput post_id={post._id} token={token} toggleComments={toggleComments} getComments={getComments}/>
     </div>
   )
 }

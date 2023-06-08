@@ -52,3 +52,18 @@
 .submit-post:active {
   transform: translateY(1px);
 }
+
+/* SUBMIT-NEW-COMMENT */
+.new-comments-submit-btn {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  border-radius: 30px;
+  color: var(--primary-color);
+  cursor: pointer;
+  opacity: 0;
+  background-color: var(--upload-photo-color);
+  transition: all .5s ease;
+}

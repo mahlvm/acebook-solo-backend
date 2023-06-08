@@ -1,3 +1,5 @@
+/*** AUTH INPUT ***/
+
 .form {
   font-size: 1.8rem;
   width: 75%;
@@ -19,6 +21,8 @@
   transition: all .1s ease-in-out;
 }
 
+/*** NEW POST MESSAGE INPUT ***/
+
 .newMessage {
   background-color: var(--primary-color);
   font-size: 1.8rem;
@@ -34,3 +38,57 @@
    outline: var(--post-btn-color-hover) 3px solid;
    transition: outline .1s ease-in-out;
  }
+
+ /*** NEW COMMENT INPUT ***/
+
+.new-comment-field {
+  cursor:  pointer;
+  width: 15rem;
+  height: 100%;
+  font-weight: 500;
+  border: none;
+  border-radius: 30px;
+  background: transparent;
+  padding-left: 3rem;
+  outline: transparent 1px solid;
+  transition: var(--comment-shrink-animation);
+}
+
+.new-comment-field::placeholder {
+  font-size: 2rem;
+  color: var(--text-black);
+  transition: all .2s ease-in-out;
+  transition: var(--comment-shrink-animation); 
+}
+.new-comment-field:hover::placeholder {
+  color: var(--post-btn-color-hover);
+  transition: all .2s ease-in-out;
+  transition: var(--comment-shrink-animation); 
+}
+
+.new-comment-field:focus {
+  width: 100%;
+  font-size: 1.5rem;
+  padding-left: 1.5rem;
+  background-color: #f7f7f7;
+  color: var(--text-black);
+  transition: var(--comment-grow-animation);
+}
+.new-comment-field:focus::placeholder {
+  color: #c4c4c4;
+  transition: var(--comment-grow-animation);
+}
+
+.new-comment-field:focus + .new-comments-submit-btn {
+  opacity: 1;
+  transition: all .5s ease;
+}
+
+.new-comment-field:focus + .new-comments-submit-btn:hover {
+  background-color: var(--upload-photo-hover);
+  transform: scale(1.1);
+  transition: all .15s ease-in-out;
+}
+.new-comment-field:focus + .new-comments-submit-btn:active {
+  transform: translateY(1px);
+}

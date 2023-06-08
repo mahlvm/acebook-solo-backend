@@ -4,7 +4,7 @@ import style from './Input.module.css';
 
 const Input = forwardRef((props, ref) => {
   return (
-    <input ref={ref} {...props.input} className={style[props.style]} required={props.style === 'input'} />
+    <input ref={ref} {...props.input} onBlur={props.onBlur ? props.onBlur : null} className={style[props.style]} required={props.required} />
   );
 });
 
