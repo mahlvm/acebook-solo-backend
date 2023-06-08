@@ -1,5 +1,5 @@
 .card {
-  height: 115rem;
+  height: 100vh;
   margin: auto;
   max-width: var(--container-max-width);
   display: flex;

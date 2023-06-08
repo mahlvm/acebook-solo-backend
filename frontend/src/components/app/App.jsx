@@ -1,7 +1,7 @@
 import LoginForm from '../authPage/LoginForm'
 import SignUpForm from '../authPage/SignUpForm'
 import AccountPage from '../account/Account';
-import Feed from '../feed/Feed'
+import Feed from '../HomePage/HomePage'
 
 import { useNavigate, Routes, Route, Navigate } from "react-router-dom";
 

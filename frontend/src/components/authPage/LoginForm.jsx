@@ -39,6 +39,7 @@ const LogInForm = ({ navigate }) => {
       <Header />
       <Card title='Login'>
         <form className={style['login-form']} onSubmit={handleSubmit}>
+          <h1>Login</h1>
           <ErrorMessage message={errorMessage} />
           <Input ref={email} style='form' input={{placeholder: 'Enter your email address', id: 'email', type: 'text'}} />
           <Input ref={password} style='form' input={{ placeholder: 'Enter your password', id: 'password', type: 'password'} } />

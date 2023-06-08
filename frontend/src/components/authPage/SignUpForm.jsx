@@ -50,6 +50,7 @@ const SignUpForm = ({ navigate }) => {
       <Header />
       <Card title='Signup'>
         <form id='signup-form' onSubmit={handleSubmit}>
+          <h1>Sign up</h1>
           <ErrorMessage message={errorMessage} />
           <Input ref={username} style='form' input={{ placeholder: 'Username', id: 'username', type: 'text' }} />
           <Input ref={email} style='form' input={{placeholder: 'Email', id: 'email', type: 'text'}} />

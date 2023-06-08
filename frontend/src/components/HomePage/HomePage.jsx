@@ -1,27 +1,23 @@
-import Post from '../post/Post'
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
+import MainContext from '../../context/mainContext';
+import style from './HomePage.module.css';
+
 import UserBanner from './userBanner/UserBanner';
 import NavBar from '../UI/NavBar';
 import NewPostForm from './newPostForm/NewPostForm';
-import EmptyPage from './emptyPage/EmptyPage';
+import Feed from './Feed/Feed';
 
-import React, { useState, useEffect, useContext } from 'react';
-import MainContext from '../../context/mainContext';
-import style from './Feed.module.css';
-
-const Feed = ({ navigate }) => {
+const HomePage = ({ navigate }) => {
   const mainContext = useContext(MainContext)
-
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
-    if (token) {
-      loadPosts()
-    }
+    if (token) { fetchPosts() }
+    return () => setPosts([])
   }, [token])
 
-  const loadPosts = () => {
+  const fetchPosts = () => {
     fetch("/posts", {
       headers: { 'Authorization': `Bearer ${token}` }
     })
@@ -35,15 +31,6 @@ const Feed = ({ navigate }) => {
       .catch(error => console.log(error));
   }
 
-  const feed = () => {
-    if (posts.length === 0) { return <EmptyPage /> }
-    else {
-      return posts.map((post) => {
-        return <Post post={post} userData={mainContext.userData} key={post._id} />
-      })
-    }
-  }
-
   if(token) {
     return(
       <>
@@ -51,11 +38,9 @@ const Feed = ({ navigate }) => {
         <div className={style['feed__container']} >
           <div className={style["user-banner__container"]}>
             <UserBanner userData={mainContext.userData} />
-            <NewPostForm onNewPost={loadPosts} token={token} />
+            <NewPostForm onNewPost={fetchPosts} token={token} />
           </div>
-          <div id='feed' role="feed">
-            { feed() }
-          </div>
+          <Feed posts={ posts } />
         </div>     
       </>
     );
@@ -65,4 +50,4 @@ const Feed = ({ navigate }) => {
   }
 }
 
-export default Feed;
+export default HomePage;
