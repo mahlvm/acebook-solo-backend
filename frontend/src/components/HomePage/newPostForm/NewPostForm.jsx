@@ -8,7 +8,11 @@ const NewPostForm = (props) => {
   const newPost = useRef()
   const [newImg, setNewImg] = useState(null);
 
-  const handleSubmit =  (event) => {
+  const uploadImageHandler = (event) => {
+    setNewImg(event.target.files[0]);
+  }
+
+  const submitHandler =  (event) => {
     if (!newPost.current.value && !newImg) return
     event.preventDefault();
 
@@ -38,18 +42,16 @@ const NewPostForm = (props) => {
     }
   }
 
-  const handleImg = (event) => {
-    setNewImg(event.target.files[0]);
-  }
-
   return (
     <>
-      <form className={style["new-post-form"]} onSubmit={handleSubmit} encType='multipart/form-data'>
+      <form className={style["new-post-form"]} onSubmit={submitHandler} encType='multipart/form-data'>
         <Input ref={ newPost } style='newMessage' input={{ placeholder: 'What do you have in mind?', id: 'post', type: 'text' }} />
         
         <div className={style["upload-photo-btn-container"]}>
-          <input type='file' className={style["upload-photo-btn"]} accept=".png, .jpg, .jpeg" id='img' onChange={handleImg} />
-          <i className="fa-regular fa-image fa-3x"></i>
+          <div>
+            <input type='file' className={style["upload-photo-btn"]} accept=".png, .jpg, .jpeg" id='img' onChange={uploadImageHandler} />
+            <i className="fa-regular fa-image fa-3x"></i>
+          </div>
           <div>
             {newImg ? <div className={style['selected-file-notification']}></div> : null }
           </div>
