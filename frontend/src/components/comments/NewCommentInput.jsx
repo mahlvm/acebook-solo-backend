@@ -1,10 +1,13 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import SubmitButton from '../UI/SubmitButton';
 import style from './NewCommentInput.module.css';
 import Input from '../UI/Input';
 
-const NewCommentInput = ({token, post_id, toggleComments, getComments}) => {
+import CommentContext from './CommentSection';
+
+const NewCommentInput = ({token, post_id}) => {
   const newComment = useRef()
+  const commentContext = useContext(CommentContext)
 
   const submitHandler = (event) => {
     if (!newComment.current.value) return
@@ -21,8 +24,8 @@ const NewCommentInput = ({token, post_id, toggleComments, getComments}) => {
     })
       .then(() => {
         newComment.current.value = ''
-        getComments()
-        toggleComments(true)
+        commentContext.fetchComments()
+        commentContext.setVisibility(true)
     })
       .catch(error => {
         console.log(error);

@@ -1,0 +1,40 @@
+/*-------------------*/
+/*   POST COUNTERS   */
+/*-------------------*/
+
+.post-counters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 2.5rem 1rem;
+}
+
+.post-counters button {
+  font-size: 1.7rem;
+}
+
+.post-counters button i {
+  color: #e00615;
+  transition: all .2s ease;
+}
+.post-counters button i:hover {
+  transform: scale(1.2);
+  transition: all .2s ease;
+}
+
+.post-counter {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.post-counter:hover {
+  color: var(--post-btn-color-hover);
+  transition: background-color .15s ease-in-out;
+  border-radius: 5px;
+}
+.post-counter:active {
+  color: var(--post-btn-color);
+
+}

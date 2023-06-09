@@ -41,14 +41,9 @@ const PostsController = {
       const userID = req.user_id;
 
       const post = await Post.findById(postID);
-
-      if (!post.likes.includes(userID)) {
-        post.likes.push(userID);
-        await post.save();
-      } else {
-        post.likes.pull(userID);
-        await post.save();
-      }
+      if (!post.likes.includes(userID)) { post.likes.push(userID) }
+      else { post.likes.pull(userID) }
+      await post.save();
 
       const updatedPost = await Post.findById(postID);
       const updatedLikes = updatedPost.likes.length;
