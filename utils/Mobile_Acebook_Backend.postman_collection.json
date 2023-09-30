@@ -1,0 +1,76 @@
+{
+  "info": {
+    "name": "Mobile Acebook Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Sign up a new user",
+      "request": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8080/users",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"email\": \"example@email.com\", \"password\": \"examplepassword\" }"
+        }
+      }
+    },
+    {
+      "name": "Log in an existing user",
+      "request": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8080/tokens",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"email\": \"example@email.com\", \"password\": \"examplepassword\" }"
+        }
+      }
+    },
+    {
+      "name": "Create a new post",
+      "request": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8080/posts",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer example_token"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"title\": \"New Post\", \"content\": \"This is a new post.\" }"
+        }
+      }
+    },
+    {
+      "name": "Fetch all posts",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8080/posts",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer example_token"
+          }
+        ]
+      }
+    }
+  ]
+}

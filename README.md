@@ -1,111 +1,125 @@
-# Acebook
+# Mobile Acebook Backend
 
-In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
+This repository contains a fully-working application using the MERN stack.
+
+The application is the same you just worked on during your recent [Engineering
+Project](https://github.com/makersacademy/course/tree/main/simple/engineering_projects),
+so it should be extremely familiar.
+
+:warning: The frontend code is included for reference only and is not required
+for this week's project. You'll be focusing on integrating your Mobile App with
+the existing backend within this repository.
+
+:information_source: Do not worry if you used a different tech stack for your
+Acebook project (e.g. Ruby on Rails), as the project is designed to be
+backend-agnostic really. Keep reading and this will make more sense soon!
+
+
+## Existing Features
+
+This is a complete Acebook project, but you will only integrate your Mobile App
+against a subset of the features already available.
+
+Feel free to explore more features if you have extra time!
+
+
+## API Endpoints Overview
+
+Here's a quick overview of the API endpoints you'll be interacting with:
+
+| Endpoint                    | Method | Payload Model | Description                          | Response Values                          |
+|-----------------------------|--------|---------------|--------------------------------------|------------------------------------------|
+| http://127.0.0.1:8080/users  | POST   | User          | Sign up a new user                   | 201 OK: `{ message: 'OK' }`              |
+| http://127.0.0.1:8080/tokens | POST   | email, password | Log in an existing user             | 201 OK: `{ token: String, message: 'OK' }`|
+| http://127.0.0.1:8080/posts  | POST   | NewPost       | Create a new post                    | 201 OK: `{ message: 'OK', token: String }`|
+| http://127.0.0.1:8080/posts  | GET    | N/A           | Fetch all posts                      | 200 OK: `{ posts: [Post], user: User, token: String }` |
+
+
+Remember to include the token in the request headers for authenticated routes.
+
+
+## Postman collections
+
+We have created a Postman collection with all the relevant requests in it for
+the week, in case you need to test your backend in isolation to get clarity
+about payloads, etc.
+
+This collection should help you make sense of what the Models in the table above
+mean :)
+
+Consider this a hint for your SwiftUI mobile app!
+
+You can find it [here](./utils/Mobile_Acebook_Backend.postman_collection.json).
+
+And to import it in Postman, simply click on "File" -> "Import" and select the
+above file, a new collection should be created and you're ready to go!
+
+
+<br>
+
+-------
+-------
+-------
+
+<br>
+
+
+We have also included all the relevant instructions that were part of the
+[original template for the MERN Acebook
+project](https://github.com/makersacademy/acebook-mern-template) just below as
+well for reference in case you need them.
 
 ## Videos
-
-These videos complement the docs below.
 
 * [An overview of the app](https://youtu.be/meTABGgrO2c)
 * [The backend (api)](https://youtu.be/mFczOzWW3vo)
 * [Postman](https://youtu.be/VO_kinuJngA)
 
-## Existing Features
-
-It's already possible for a user to:
-- Sign up
-- Sign in
-- Sign out
-- View a list of posts
 
 ## Technologies
 
-Here's an overview of the technologies used to build this template application. You don't need to do a deep dive on each one right now. Instead, try to get a feeling for the big picture and then dive into the details when a specific task pushes you in that direction.
-
 ### **M** is for MongoDB
-[MongoDB](https://www.mongodb.com/) is a _NoSQL_ database program that stores data in collections of documents (in a format similar to JSON), rather than in tables. The application interacts with MongoDB using a tool called Mongoose.
+[MongoDB](https://www.mongodb.com/) is a _NoSQL_ database program that stores
+data in collections of documents (in a format similar to JSON), rather than in
+tables. The application interacts with MongoDB using a tool called Mongoose.
 
 ### **E** is for Express
-[Express](https://expressjs.com/) is the Javascript equivalent of Sinatra. The structure of this application will feel quite different to what you're used to but the principles are the same.
+[Express](https://expressjs.com/) is the Javascript equivalent of Sinatra. The
+structure of this application will feel quite different to what you're used to
+but the principles are the same.
 
 ### **R** is for React
-[React](https://reactjs.org/) is a hugely popular tool that is used to build engaging front ends. The basic principle is that the front end is split up into _components_, each of which _could_ include some logic, template structure (HTML) and styling (CSS).
 
 ### **N** is for Node
-Java script was originally designed to run exclusively in browsers, such as Chrome. [Node](https://nodejs.org/en/) is a tool that allows you to run Javascript outside the browser and its invention made it possible to build full stack Javascript apps.
+Javascript was originally designed to run exclusively in browsers, such as
+Chrome. [Node](https://nodejs.org/en/) is a tool that allows you to run
+Javascript outside the browser and its invention made it possible to build full
+stack Javascript apps.
 
-We also used...
-
-- [Jest](https://jestjs.io/) for unit testing on the back end
-- [Cypress](https://www.cypress.io/) for end-to-end testing and component testing, on the front end
-- [Mongoose](https://mongoosejs.com) to model objects in MongoDB.
-- [Handlebars](https://handlebarsjs.com/) for the `home` template.
-- [ESLint](https://eslint.org) for linting.
-- [Nodemon](https://nodemon.io/) to reload the server automatically.
 
 ## Architecture
 
 This application is comprised of two distinct pieces.
 
 - A backend API built with Express
-- A front end built with React
+- A frontend built with React (for reference only)
 
-The React front end sends HTTP requests to the backend API and receives JSON in response body, rather than a whole page of HTML.
 
-For example, the React front end would send this request to retrieve the entire `Post` collection.
-
-```
-GET "/posts"
-```
-
-And the body of the response would look like this.
-
-```
-{
-    "posts": [
-        {
-            "_id": "62f8ef0e6c1ffcf74cbbb181",
-            "message": "Hello, this is my first Acebook post!",
-            "__v": 0
-        },
-        {
-            "_id": "62f8ef366c1ffcf74cbbb188",
-            "message": "Welcome to Acebook! Have an Acetime :)",
-            "__v": 0
-        },
-        {
-            "_id": "62f8f08af1cffef85a7426ae",
-            "message": "Thank you :D",
-            "__v": 0
-        }
-    ]
-}
-```
-
-Here's a diagram of the above
-<br>
-<br>
-![a diagram of the MERN stack](./diagrams/mern_stack.png)
-<br>
-<br>
-
-Once received by the React FE, the JSON in the response body is used to render a list of posts on the page.
-
-![response body mapped onto a page](./diagrams/response_parsing.png)
-
-This architectural pattern is quite popular because it allows teams to build multiple front ends, all of which use the same backend API. You could, for example, go on to build a mobile app without needing to create another backend API.
 ## Authentication
-
-Up until now, if you've implemented authentication, it will likely have been done using sessions - this is a useful point of comparison but, if you haven't implemented authentication yet, that's not going to impede you right now.
 
 Here's the authentication flow for this application
 
-1. A registered user submits their email address and password via the React front end.
-2. The Express backend receives the data and tries to find a user in the DB with the same email address.
-3. If a user is found, the password in the database is compared to the password that was submitted.
-4. If the passwords match, a JSON Web Token is generated and returned, as part of the response.
-5. The React front end receives the token and holds on to it.
-6. Every request to `"/posts"` must include a valid token (which is checked by the backend).
+1. A registered user submits their email address and password from the frontend
+   (our Mobile App in this case).
+2. The backend receives the data and tries to find a user in the DB with the
+   same email address.
+3. If a user is found, the password in the database is compared to the password
+   that was submitted.
+4. If the passwords match, a JSON Web Token is generated and returned, as part
+   of the response.
+5. The frontend receives the token and holds on to it.
+6. Every request to the backend that requires authentication must include a
+   valid token (which is checked by the backend).
 7. When the user logs out, the front end discards the token.
 
 ![authentication flow diagram](./diagrams/auth_flow.png)
@@ -116,14 +130,17 @@ A JSON Web Token, or JWT, is a token that comprises three parts
 
 - A header, which contains information about how the token was generated.
 - A signature, which is used to verify the token.
-- A payload, which you can use to store some **non-sensitive data** like a user id. Note that the payload is not secure and can be decoded very easily.
+- A payload, which you can use to store some **non-sensitive data** like a user
+  id. Note that the payload is not secure and can be decoded very easily.
 
-The signature is created using a 'secret', which must be kept private (i.e. not put on GitHub) otherwise nefarious internet users could start to issue tokens for your application.
+The signature is created using a 'secret', which must be kept private (i.e. not
+put on GitHub) otherwise nefarious internet users could start to issue tokens
+for your application.
 
-Here, we've used an environment variable called `JWT_SECRET`, which you'll see used in the commands to start the application and run the tests (below). You can change the value of that environment variable to anything you like.
-## Card wall
+Here, we've used an environment variable called `JWT_SECRET`, which you'll see
+used in the commands to start the application and run the tests (below). You can
+change the value of that environment variable to anything you like.
 
-https://acebook-ep2-teamfire.atlassian.net/jira/software/projects/TFA/boards/1
 
 ## Quickstart
 
@@ -142,24 +159,28 @@ https://acebook-ep2-teamfire.atlassian.net/jira/software/projects/TFA/boards/1
 
 ### Set up your project
 
-1. Fork this repository
-2. Rename your fork to `acebook-<team name>`
-3. Clone your fork to your local machine
-4. Install Node.js dependencies for both FE and BE (API)
+:warning: Make sure that your backend server (in `./api`) is running so that you
+can interact with it from your Mobile App.
+
+:rotating_light: You do not need to run the React application (in `./frontend`)
+at all.
+
+1. Clone this project to your local machine. (Do not fork it, as you will not
+   make any changes to it really.)
+2. Install Node.js dependencies for the backend (API)
    ```
    ; cd api
    ; npm install
-   ; cd ../frontend
-   ; npm install
    ```
-5. Install an ESLint plugin for your editor. For example: [`linter-eslint`](https://github.com/AtomLinter/linter-eslint) for Atom.
-6. Install MongoDB
+3. Install MongoDB (if you haven't already)
    ```
    brew tap mongodb/brew
    brew install mongodb-community@5.0
    ```
-   *Note:* If you see a message that says `If you need to have mongodb-community@5.0 first in your PATH, run:`, follow the instruction. Restart your terminal after this.
-7. Start MongoDB
+   *Note:* If you see a message that says `If you need to have
+   mongodb-community@5.0 first in your PATH, run:`, follow the instruction.
+   Restart your terminal after this.
+4. Start MongoDB
    ```
    brew services start mongodb-community@5.0
    ```
@@ -174,83 +195,15 @@ https://acebook-ep2-teamfire.atlassian.net/jira/software/projects/TFA/boards/1
    ; cd api
    ; JWT_SECRET=SUPER_SECRET npm start
    ```
-2. Start the front end
-
-  In a new terminal session...
-
-  ```
-  ; cd frontend
-  ; npm start
-  ```
-
-You should now be able to open your browser and go to `http://localhost:3000/signup` to create a new user.
-
-Then, after signing up, you should be able to log in by going to `http://localhost:3000/login`.
-
-After logging in, you won't see much but you can create posts using PostMan and they should then show up in the browser if you refresh the page.
-
-### Testing
-
-
-#### The Backend (API)
-
-**Note the use of an environment variable for the JWT secret**
-
-  Start the server in test mode (so that it connects to the test DB)
-
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run start:test
-  ```
-
-  Then run the tests in a new terminal session
-
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run test
-  ```
-
-#### The frontend (React)
-
-**Note the use of an environment variable for the JWT secret**
-
-  Start the server in test mode (so that it connects to the test DB)
-
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run start:test
-  ```
-
-  Then start the front end in a new terminal session
-
-  ```
-  ; cd frontend
-  ; JWT_SECRET=SUPER_SECRET npm start
-  ```
-
-  Then run the tests in a new terminal session
-
-  ```
-  ; cd frontend
-  ; JWT_SECRET=SUPER_SECRET npm run test
-  ```
 
 ## MongoDB Connection Errors?
 
-Some people occasionally experience MongoDB connection errors when running the tests or trying to use the application. Here are some tips which might help resolve such issues.
+Some people occasionally experience MongoDB connection errors when running the
+tests or trying to use the application. Here are some tips which might help
+resolve such issues.
 
 - Check that MongoDB is installed using `mongo --version`
 - Check that it's running using `brew services list`
 
-If you have issues that are not resolved by these tips, please reach out to a coach and, once the issue is resolved, we can add a new tip!
-
-
-<!-- BEGIN GENERATED SECTION DO NOT EDIT -->
-
----
-
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😀)  
-Click an emoji to tell us.
-
-<!-- END GENERATED SECTION DO NOT EDIT -->
+If you have issues that are not resolved by these tips, please reach out to a
+coach and, once the issue is resolved, we can add a new tip!
