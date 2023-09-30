@@ -35,10 +35,8 @@ const tokenChecker = (req, res, next) => {
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if(err) {
-      console.log(err)
       res.status(401).json({message: "auth error"});
     } else {
-      console.log(payload);
       req.user_id = payload.user_id;
       next();
     }
@@ -54,8 +52,7 @@ app.use("/comments", tokenChecker, commentsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  console.log(req)
-  next(createError(404));
+  // next(createError(404));
 });
 
 // error handler

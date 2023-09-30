@@ -1,4 +1,4 @@
-import CommentContext from '../Comments/CommentSection';
+import CommentContext from '../comments/CommentSection';
 
 import style from './PostCounters.module.css';
 import { useContext } from 'react';

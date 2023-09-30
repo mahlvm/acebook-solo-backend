@@ -1,9 +1,8 @@
-import EmptyPage from '../EmptyPage';
-import Post from '../../Post/Post';
 import MainContext from '../../../context/mainContext';
+import Post from '../../post/Post';
+import EmptyPage from '../EmptyPage';
 
 import { useContext } from 'react';
-import style from './Feed.module.css';
 
 const Feed = ({ posts }) => {
   const mainContext = useContext(MainContext)

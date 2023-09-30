@@ -28,7 +28,10 @@ const UsersController = {
             req.body.password = hash;
             const user = new User(req.body);
 
-            if (req.file) { user.avatar = `/uploads/${req.file.filename}` }
+            // Save the publicId for the avatar
+            if (req.body.avatar) { 
+              user.avatar = req.body.avatar; 
+            }
             
             user.save((err) => {
             if (err) {
@@ -62,34 +65,7 @@ const UsersController = {
       if (err) { res.status(400).json({ message: 'Bad request' }) }
       else { res.status(201).json({ message: 'OK' }) }
       });
-    
-    console.log('USER', currentUser)
-    console.log('REQFILE', req.file.filename)
-    console.log('REQFILE', req.params.userId)
-    // const { id } = req.body
-    // let updateObj = {};
-
-    // if('email' in req.body) {
-    //   updateObj = { email: req.body.email }
-    // } else if ('username' in req.body) {
-    //   updateObj = { username: req.body.username } 
-    // } else if ('avatar' in req.body) {
-    //   updateObj = { avatar: req.body.avatar }
-    // } 
-    // else {
-    //   return res.status(400).json({message: 'Invalid request body'})
-    // }
-
-    // User.updateOne({_id: id}, updateObj, (err, data) => {
-    //   if (err) {
-    //     res.status(400).json({message: 'Unable to update'})
-    //   } else {
-    //     res.status(200).json({message: 'Updated'});
-    //   }
-    // })
   }
-
-  
 };
 
 module.exports = UsersController;

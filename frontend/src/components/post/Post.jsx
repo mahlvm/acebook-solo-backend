@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Comments from '../Comments/Comments'
-import './Post.css'
-import PostHeader from './PostHeader';
+import React, { useEffect, useState } from 'react';
+import { CommentSection } from '../comments/CommentSection';
+import NewCommentInput from '../comments/NewCommentInput';
+import './Post.css';
 import PostContent from './PostContent';
-import { CommentSection } from '../Comments/CommentSection';
-import NewCommentInput from '../Comments/NewCommentInput';
 import PostCounters from './PostCounters';
+import PostHeader from './PostHeader';
 
 const Post = ({ post, userData }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));

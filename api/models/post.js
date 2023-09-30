@@ -4,10 +4,7 @@ const { ObjectID } = require("mongodb");
 
 const PostSchema = new mongoose.Schema({
   message: { type: String },
-  image: {
-    contentType: String,
-    fileName: String,
-  },
+  image: { type: String },
   createdBy: { 
     type: ObjectID,
     ref: 'Users',
