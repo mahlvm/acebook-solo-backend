@@ -1,14 +1,16 @@
 # Mobile Acebook Backend
 
-This repository contains a fully-working application using the MERN stack.
-
-The application is the same you just worked on during your recent [Engineering
-Project](https://github.com/makersacademy/course/tree/main/simple/engineering_projects),
-so it should be extremely familiar.
+This repository contains a backend application using the MERN stack. The
+frontend code is also included but is not fully functional due to recent backend
+changes.
 
 :warning: The frontend code is included for reference only and is not required
 for this week's project. You'll be focusing on integrating your Mobile App with
 the existing backend within this repository.
+
+The application is the same you just worked on during your recent [Engineering
+Project](https://github.com/makersacademy/course/tree/main/simple/engineering_projects),
+so it should be extremely familiar.
 
 :information_source: Do not worry if you used a different tech stack for your
 Acebook project (e.g. Ruby on Rails), as the project is designed to be
@@ -21,6 +23,13 @@ This is a complete Acebook project, but you will only integrate your Mobile App
 against a subset of the features already available.
 
 Feel free to explore more features if you have extra time!
+
+:information_source: However, please note that you do not own the backend as
+it's managed by another team.
+
+Any requests for additional endpoints or changes will be analyzed by this team
+and taken into consideration. However you can make your requests (via your
+coach!).
 
 
 ## API Endpoints Overview
