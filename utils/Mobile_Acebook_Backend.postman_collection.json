@@ -55,7 +55,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{ \"title\": \"New Post\", \"content\": \"This is a new post.\" }"
+          "raw": "{ \"message\": \"This is the message for a new post\", \"publicID\": \"This is the publicID value for the post image.\" }"
         }
       }
     },
