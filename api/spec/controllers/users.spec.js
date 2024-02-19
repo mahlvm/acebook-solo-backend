@@ -27,11 +27,11 @@ describe("/users", () => {
   })
 
   describe("POST, when password is missing", () => {
-    test("response code is 400", async () => {
+    test("response code is 401", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "skye@email.com"})
-      expect(response.statusCode).toBe(400)
+        .send({ email: "skye@email.com" })
+      expect(response.statusCode).toBe(401)
     });
 
     test("does not create a user", async () => {
@@ -47,7 +47,7 @@ describe("/users", () => {
     test("response code is 400", async () => {
       let response = await request(app)
         .post("/users")
-        .send({password: "1234"})
+        .send({ password: "1234" })
       expect(response.statusCode).toBe(400)
     });
 

@@ -12,8 +12,6 @@ const PostsController = {
       if (err) { throw err }
       const token = await TokenGenerator.jsonwebtoken(req.user_id)
 
-      // console.log({ posts: posts, user: user, token: token });
-
       res.status(200).json({ posts: posts, user: user, token: token });
     }).sort({ createdAt: -1 });
   },

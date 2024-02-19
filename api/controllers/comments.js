@@ -57,7 +57,6 @@ const CommentsController = {
 
       res.status(200).json({ message: "OK", likes: updatedLikes });
     } catch (err) {
-      console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
     }
   },
