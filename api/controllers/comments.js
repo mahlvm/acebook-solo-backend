@@ -60,16 +60,43 @@ const CommentsController = {
       res.status(500).json({ message: "Internal Server Error" });
     }
   },
+  Delete: async (req, res) => {
+    try {
+      const commentId = req.params.commentId;
+      const userId = req.user_id; // Supondo que o userId vem do token após a autenticação
 
-  Delete: (req, res) => {
-    Comment.deleteMany({createdBy: req.query.id}, (err, data) => {
-      if (err) {
-        res.status(400).json({message: 'Unable to delete comments'})
-      } else {
-        res.status(200).json({message: 'Comments deleted'});
+      // Busca o comentário pelo ID
+      const comment = await Comment.findById(commentId);
+
+      if (!comment) {
+        return res.status(404).json({ message: "Comment not found" });
       }
-    })
-  }
+
+      // Verifica se o usuário é o autor do comentário
+      if (comment.createdBy.toString() !== userId) {
+        return res.status(403).json({ message: "You are not authorized to delete this comment" });
+      }
+
+      // Deleta o comentário se o usuário for o autor
+      await Comment.findByIdAndDelete(commentId);
+
+      res.status(200).json({ message: "Comment deleted successfully" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Unable to delete comment", error: err });
+    }
+  },
+
+
+  // Delete: (req, res) => {
+  //   Comment.deleteMany({createdBy: req.query.id}, (err, data) => {
+  //     if (err) {
+  //       res.status(400).json({message: 'Unable to delete comments'})
+  //     } else {
+  //       res.status(200).json({message: 'Comments deleted'});
+  //     }
+  //   })
+  // }
 };
 
 // HELPER METHODS -----------------

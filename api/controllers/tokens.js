@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const User = require("../models/user");
-const TokenGenerator = require("../models/token_generator")
+const TokenGenerator = require("../models/token_generator");
 
 const SessionsController = {
 
@@ -10,18 +10,22 @@ const SessionsController = {
 
     User.findOne({ email: email })
       .then((user) => {
-        if (!user) { res.status(401).json({ message: "Email not found" }) }
-        else {
+        if (!user) {
+          res.status(401).json({ message: "Email not found" });
+        } else {
           bcrypt.compare(password, user.password, async (err, result) => {
-          if (err) { res.status(401).json({message: 'Password encryption error'}) }
-          else if (result === false) { res.status(402).json({message: 'Incorrect password'}) }
-          else {
-            const token = await TokenGenerator.jsonwebtoken(user.id)
-            res.status(201).json({ token: token, message: "OK" });
-          }
-        })
-      }
-    });
+            if (err) {
+              res.status(401).json({ message: 'Password encryption error' });
+            } else if (result === false) {
+              res.status(402).json({ message: 'Incorrect password' });
+            } else {
+              const token = await TokenGenerator.jsonwebtoken(user.id);
+              // Adicionar o userId na resposta
+              res.status(201).json({ token: token, userId: user.id, username: user.username, email: user.email, avatar: user.avatar, message: "OK" });
+            }
+          });
+        }
+      });
   }
 };
 

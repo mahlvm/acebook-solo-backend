@@ -56,15 +56,40 @@ const PostsController = {
     }
   },
 
-  Delete: (req, res) => {
-    Post.deleteMany({createdBy: req.query.id}, (err, data) => {
-      if (err) {
-        res.status(400).json({message: 'Unable to delete posts'})
-      } else {
-        res.status(200).json({message: 'Posts deleted'});
+  // Delete: (req, res) => {
+  //   Post.deleteMany({createdBy: req.query.id}, (err, data) => {
+  //     if (err) {
+  //       res.status(400).json({message: 'Unable to delete posts'})
+  //     } else {
+  //       res.status(200).json({message: 'Posts deleted'});
+  //     }
+  //   })
+  // }
+
+  Delete: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.postId);
+  
+      // Verifica se o post existe
+      if (!post) {
+        return res.status(404).json({ message: 'Post not found' });
       }
-    })
+  
+      // Verifica se o usuário autenticado é o autor do post
+      if (post.createdBy.toString() !== req.user_id) {
+        return res.status(403).json({ message: 'You are not authorized to delete this post' });
+      }
+  
+      // Se for o autor, deleta o post
+      await Post.findByIdAndDelete(req.params.postId);
+      return res.status(200).json({ message: 'Post deleted successfully' });
+  
+    } catch (err) {
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
   }
+  
+  
 
 };
 

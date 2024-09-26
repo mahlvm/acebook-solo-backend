@@ -56,16 +56,43 @@ const UsersController = {
     })
   },
 
+  // Update: async (req, res) => {
+  //   const currentUser = await User.findById(req.params.userId)
+
+  //   if (req.file) currentUser.avatar = `/uploads/${req.file.filename}`
+
+  //   currentUser.save((err) => {
+  //     if (err) { res.status(400).json({ message: 'Bad request' }) }
+  //     else { res.status(201).json({ message: 'OK' }) }
+  //     });
+  // },
+  
   Update: async (req, res) => {
-    const currentUser = await User.findById(req.params.userId)
+    try {
+        // Encontrar o usuário atual pelo ID
+        const currentUser = await User.findById(req.params.userId);
+        if (!currentUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-    if (req.file) currentUser.avatar = `/uploads/${req.file.filename}`
+        // Atualiza o avatar se um novo arquivo for enviado
+        if (req.file) {
+            currentUser.avatar = `/uploads/${req.file.filename}`;
+        }
 
-    currentUser.save((err) => {
-      if (err) { res.status(400).json({ message: 'Bad request' }) }
-      else { res.status(201).json({ message: 'OK' }) }
-      });
-  }
+        // Atualiza outros campos a partir do req.body
+        // Use Object.assign ou a spread operator para atualizar
+        Object.assign(currentUser, req.body);
+
+        // Salva as alterações
+        await currentUser.save();
+
+        return res.status(200).json({ message: 'User updated successfully', user: currentUser });
+    } catch (err) {
+        console.error(err);
+        return res.status(400).json({ message: 'Bad request', error: err.message });
+    }
+}
 };
 
 module.exports = UsersController;

@@ -7,6 +7,8 @@ router.post("/:postId", CommentsController.Create);
 router.get("/owner/:id", CommentsController.GetCommentOwnerData)
 router.put("/:commentId/like", CommentsController.LikePost)
 router.get("/:commentId/likes", CommentsController.LikePost)
-router.delete("/", CommentsController.Delete)
+router.delete("/:commentId", CommentsController.Delete);
+// router.delete("/", CommentsController.Delete)
+
 
 module.exports = router;

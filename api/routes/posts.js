@@ -8,5 +8,7 @@ router.get("/:ownerId", PostsController.GetPostOwnerData)
 router.put("/:postId/like", PostsController.LikePost)
 router.get("/:postId/likes", PostsController.LikePost)
 router.delete("/", PostsController.Delete)
+router.delete("/:postId", PostsController.Delete);
+
 
 module.exports = router;
