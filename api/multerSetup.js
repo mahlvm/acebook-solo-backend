@@ -5,25 +5,28 @@ const fs = require('fs')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const pathToReactPublic = path.join(__dirname, '..', 'frontend', 'public', 'uploads')
-    if (!fs.existsSync(pathToReactPublic)) { 
-      fs.mkdirSync(pathToReactPublic, { recursive: true }); // creates folders if don't exist
-    }
-    cb(null, pathToReactPublic); //img filepath
+    // const pathToReactPublic = path.join(__dirname, '..', 'frontend', 'public', 'uploads')
+    // if (!fs.existsSync(pathToReactPublic)) { 
+    //   fs.mkdirSync(pathToReactPublic, { recursive: true }); // creates folders if don't exist
+    // }
+    // cb(null, pathToReactPublic); //img filepath
+    cb(null, "upload/"); //img filepath
   },
 
   filename: (req, file, cb) => {
-    cb(null, `${uuidv4()}-${Date.now()}${path.extname(file.originalname)}`); //img filename 
+    // cb(null, `${uuidv4()}-${Date.now()}${path.extname(file.originalname)}`); 
+    cb(null, Date.now() + path.extname(file.originalname));
   }
 });
 
-const fileFilter = (req, file, cb) => {
-  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+// const fileFilter = (req, file, cb) => {
+//   const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
   
-  if (allowedFileTypes.includes(file.mimetype)) { cb(null, true); }
-  else { cb(null, false); } 
-};
+//   if (allowedFileTypes.includes(file.mimetype)) { cb(null, true); }
+//   else { cb(null, false); } 
+// };
 
-const upload = multer({ storage, fileFilter });
+const upload = multer({ storage });
+
 
 module.exports = upload

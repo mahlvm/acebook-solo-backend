@@ -13,6 +13,36 @@ const UsersController = {
     });
   },
 
+  // Create: (req, res) => {
+  //   User.findOne({ email: req.body.email }, (err, user) => {
+  //     if (user) {
+  //       return res.status(409).json({ message: 'Email address already exists' });
+  //     } else {
+  //       const saltRounds = 10;
+  //       bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+  //         if (err) {
+  //           return res.status(401).json({ message: 'Password encryption error' });
+  //         }
+  //         req.body.password = hash;
+
+  //         const user = new User(req.body);
+
+  //         if (req.body.avatar) {
+  //           user.avatar = req.body.avatar;
+  //         }
+
+  //         user.save((err) => {
+  //           if (err) {
+  //             return res.status(400).json({ message: 'Bad request' });
+  //           } else {
+  //             return res.status(201).json({ message: 'OK' });
+  //           }
+  //         });
+  //       });
+  //     }
+  //   });
+  // },
+
   Create: (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
       if (user) {
@@ -24,17 +54,19 @@ const UsersController = {
             return res.status(401).json({ message: 'Password encryption error' });
           }
           req.body.password = hash;
-          const user = new User(req.body);
-
-          if (req.body.avatar) {
-            user.avatar = req.body.avatar;
+  
+          const newUser = new User(req.body);
+  
+          // Verifique se um arquivo foi enviado e atribua o avatar
+          if (req.file) {
+            newUser.avatar = `/uploads/${req.file.filename}`; // Ajuste o caminho conforme necessário
           }
-
-          user.save((err) => {
+  
+          newUser.save((err) => {
             if (err) {
-              return res.status(400).json({ message: 'Bad request' });
+              return res.status(400).json({ message: 'Bad request', error: err.message });
             } else {
-              return res.status(201).json({ message: 'OK' });
+              return res.status(201).json({ message: 'User created successfully', user: newUser });
             }
           });
         });
