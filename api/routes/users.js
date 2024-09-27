@@ -11,6 +11,7 @@ router.get("/", UsersController.Index);
 router.post("/", upload.single('profilePicture'), UsersController.Create);
 router.put("/:userId", upload.single('profilePicture'), UsersController.Update);
 router.delete("/", UsersController.Delete);
+router.get("/avatar/:filename", UsersController.GetAvatar);
 
 
 module.exports = router;
