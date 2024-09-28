@@ -27,14 +27,36 @@ const PostsController = {
     });
   },
 
-  GetPostOwnerData: (req, res) => {
-    Users.findById(req.params.ownerId, async (err, data) => {
-      if (err) { throw err }
+  // GetPostOwnerData: (req, res) => {
+  //   Users.findById(req.params.ownerId, async (err, data) => {
+  //     if (err) { throw err }
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(200).json({ownerData: data, token: token });
-    })
+  //     const token = await TokenGenerator.jsonwebtoken(req.user_id)
+  //     res.status(200).json({ownerData: data, token: token });
+  //   })
+  // },
+
+  GetPostOwnerData: async (req, res) => {
+    try {
+      const userId = req.params.ownerId; // ID do usuário passado na URL
+      
+      // Encontra todos os posts criados pelo usuário com o ID fornecido
+      const posts = await Post.find({ createdBy: userId }).sort({ createdAt: -1 });
+  
+      if (!posts) {
+        return res.status(404).json({ message: 'No posts found for this user' });
+      }
+  
+      // Gera um novo token (caso seja necessário para a autenticação)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+  
+      res.status(200).json({ posts: posts, token: token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   },
+  
 
   LikePost: async (req, res) => {
     try {
