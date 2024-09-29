@@ -19,12 +19,18 @@ const PostSchema = new mongoose.Schema({
     type: ObjectID,
     ref: 'Users',
   }],
-
   comments: {
     type: Number,
     default: 0,
+  },
+  username: {  // Novo campo
+    type: String,
+    required: true,
+  },
+  avatar: {  // Novo campo
+    type: String,
+    required: true,
   }
-
 });
 
 const Post = mongoose.model("Post", PostSchema);

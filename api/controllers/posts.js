@@ -124,11 +124,13 @@ const findUser = (userId) => {
 
 const buildPostData = async (req) => {
   const post = new Post();
-  const user = await findUser(req.user_id)
+  const user = await findUser(req.user_id);
   
-  post.createdBy = user
-  post.message = req.body.message
+  post.createdBy = user._id;  // Atribui o ID do usuário
+  post.message = req.body.message;
   post.image = req.body.publicID;
+  post.username = user.username;  // Atribui o username
+  post.avatar = user.avatar;  // Atribui o avatar
 
   return post
 }
