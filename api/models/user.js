@@ -16,7 +16,11 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String,
     default: '/default_avatar.png'
-  }
+  },
+  friends: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 const User = mongoose.model("User", UserSchema);

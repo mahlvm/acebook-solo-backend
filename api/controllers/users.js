@@ -109,7 +109,56 @@ const UsersController = {
         console.error(err);
         return res.status(400).json({ message: 'Bad request', error: err.message });
     }
+},
+
+AddFriend: async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    const friend = await User.findById(req.params.friendId);
+
+    if (!user || !friend) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Verifica se o amigo já foi adicionado
+    if (user.friends.includes(req.params.friendId)) {
+      return res.status(400).json({ message: 'Friend already added' });
+    }
+
+    user.friends.push(req.params.friendId);
+    await user.save();
+
+    return res.status(200).json({ message: 'Friend added successfully', user });
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
+},
+
+// Mostrar amigos de um usuário específico
+GetFriends: async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId).populate('friends', 'username email avatar');
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json({ friends: user.friends });
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
+},
+
+// Listar todos os usuários
+GetAllUsers: async (req, res) => {
+  try {
+    const users = await User.find({}, 'username email avatar');
+    return res.status(200).json({ users });
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
 }
+
 };
 
 module.exports = UsersController;
