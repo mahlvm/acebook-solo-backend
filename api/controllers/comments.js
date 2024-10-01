@@ -113,15 +113,18 @@ const retrieveImgData = (req) => {
 }
 
 const buildCommentData = async (req) => {
-  const comment = new Comment();
-  const user = await findUser(req.user_id);
-  const post = await Post.findById(req.params.postId);
+  const user = await findUser(req.user_id);  // Busca o usuário pelo ID
+  const post = await Post.findById(req.params.postId);  // Busca o post
 
-  comment.createdBy = user
-  comment.message = req.body.comment
-  comment.postId = post
-  if (req.file) { post.image = retrieveImgData(req) }
-  return comment
+  const comment = new Comment({
+    createdBy: user._id,  // Salva o ID do usuário
+    username: user.username,  // Salva o nome de usuário
+    avatar: user.avatar,  // Salva o avatar do usuário
+    message: req.body.comment,  // Salva o comentário
+    postId: post._id,  // Associa ao post
+  });
+
+  return comment;
 }
 
 module.exports = CommentsController;

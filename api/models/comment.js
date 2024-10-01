@@ -6,14 +6,22 @@ const { ObjectID } = require("mongodb");
 const CommentSchema = new mongoose.Schema({
   postId: { 
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Posts', // this might need to be singular like line 3 but the posts table is plural in the db so not sure what it's linked to.
+    ref: 'Post',  // Associa o modelo Post
     immutable: true,
   },
   message: { type: String },
   createdBy: { 
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Users',
+    ref: 'User',  // Associa o modelo User
     immutable: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  avatar: {
+    type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -21,10 +29,12 @@ const CommentSchema = new mongoose.Schema({
     default: () => Date.now(),
   },
   likes: [{
-    type: ObjectID,
-    ref: 'Users',
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   }],
 });
+
+
 
 const Comment = mongoose.model("Comment", CommentSchema);
 
