@@ -1,88 +1,30 @@
-# Mobile Acebook Backend
+# Acebook Backend
 
-This repository contains a backend application using the MERN stack. The
-frontend code is also included but is not fully functional due to recent backend
-changes.
-
-:warning: The frontend code is included for reference only and is not required
-for this week's project. You'll be focusing on integrating your Mobile App with
-the existing backend within this repository.
-
-The application is the same you just worked on during your recent [Engineering
-Project](https://github.com/makersacademy/course/tree/main/simple/engineering_projects),
-so it should be extremely familiar.
-
-:information_source: Do not worry if you used a different tech stack for your
-Acebook project (e.g. Ruby on Rails), as the project is designed to be
-backend-agnostic really. Keep reading and this will make more sense soon!
-
-
-## Existing Features
-
-This is a complete Acebook project, but you will only integrate your Mobile App
-against a subset of the features already available.
-
-Feel free to explore more features if you have extra time!
-
-:information_source: However, please note that you do not own the backend as
-it's managed by another team.
-
-Any requests for additional endpoints or changes will be analyzed by this team
-and taken into consideration. However you can make your requests (via your
-coach!).
+This repository contains a backend application using the MERN stack. 
 
 
 ## API Endpoints Overview
 
 Here's a quick overview of the API endpoints you'll be interacting with:
 
-| Endpoint                    | Method | Payload Model | Description                          | Response Values                          |
-|-----------------------------|--------|---------------|--------------------------------------|------------------------------------------|
-| http://127.0.0.1:8080/users  | POST   | User          | Sign up a new user                   | 201 OK: `{ message: 'OK' }`              |
-| http://127.0.0.1:8080/tokens | POST   | email, password | Log in an existing user             | 201 OK: `{ token: String, message: 'OK' }`|
-| http://127.0.0.1:8080/posts  | POST   | NewPost       | Create a new post                    | 201 OK: `{ message: 'OK', token: String }`|
-| http://127.0.0.1:8080/posts  | GET    | N/A           | Fetch all posts                      | 200 OK: `{ posts: [Post], user: User, token: String }` |
+| Endpoint                                                  | Method |  Description             | 
+|-----------------------------------------------------------|--------|--------------------------|
+| http://127.0.0.1:8080/users                               | POST   | Sign up a new user       |
+| http://127.0.0.1:8080/users/all                           | GET    | Fetch all users          | 
+| http://127.0.0.1:8080/users/:userId/add-friend/:friendId  | POST   | Connect two users        | 
+| http://127.0.0.1:8080/users/:userId/friends               | GET    | Connections by users     | 
+| http://127.0.0.1:8080/users/avatar/:filename              | GET    | Fetch avatar             | 
+| http://127.0.0.1:8080/users/:userId                       | PUT    | Update user              | 
+| http://127.0.0.1:8080/tokens                              | POST   | Log in an existing user  | 
+| http://127.0.0.1:8080/posts                               | POST   | Create a new post        | 
+| http://127.0.0.1:8080/posts                               | GET    | Fetch all posts          | 
+| http://127.0.0.1:8080/posts                               | DELETE | Delete post              | 
+| http://127.0.0.1:8080/posts/:postId/like                  | GET    | Like posts               | 
+| http://127.0.0.1:8080/comments/:postId                    | POST   | Create a new comment     |
+| http://127.0.0.1:8080/comments/:postId                    | GET    | Fetch comments by post   |
+| http://127.0.0.1:8080/comments/:commentId/like            | PUT    | Like comment             |
+| http://127.0.0.1:8080/comments//:commentId"               | DELETE | Delete comment           |
 
-
-Remember to include the token in the request headers for authenticated routes.
-
-
-## Postman collections
-
-We have created a Postman collection with all the relevant requests in it for
-the week, in case you need to test your backend in isolation to get clarity
-about payloads, etc.
-
-This collection should help you make sense of what the Models in the table above
-mean :)
-
-Consider this a hint for your SwiftUI mobile app!
-
-You can find it [here](./utils/Mobile_Acebook_Backend.postman_collection.json).
-
-And to import it in Postman, simply click on "File" -> "Import" and select the
-above file, a new collection should be created and you're ready to go!
-
-
-<br>
-
--------
--------
--------
-
-<br>
-
-
-We have also included all the relevant instructions that were part of the
-[original template for the MERN Acebook
-project](https://github.com/makersacademy/acebook-mern-template) just below as
-well for reference in case you need them.
-
-## Videos
-
-* [An overview of the app](https://youtu.be/meTABGgrO2c)
-* [The backend (api)](https://youtu.be/mFczOzWW3vo)
-* [Postman](https://youtu.be/VO_kinuJngA)
 
 
 ## Technologies
@@ -108,10 +50,8 @@ stack Javascript apps.
 
 ## Architecture
 
-This application is comprised of two distinct pieces.
-
 - A backend API built with Express
-- A frontend built with React (for reference only)
+
 
 
 ## Authentication
@@ -133,7 +73,7 @@ Here's the authentication flow for this application
 
 ![authentication flow diagram](./diagrams/auth_flow.png)
 
-### What is a JSON Web Token?
+### JSON Web Token
 
 A JSON Web Token, or JWT, is a token that comprises three parts
 
@@ -171,11 +111,8 @@ change the value of that environment variable to anything you like.
 :warning: Make sure that your backend server (in `./api`) is running so that you
 can interact with it from your Mobile App.
 
-:rotating_light: You do not need to run the React application (in `./frontend`)
-at all.
 
-1. Clone this project to your local machine. (Do not fork it, as you will not
-   make any changes to it really.)
+1. Clone this project to your local machine.
 2. Install Node.js dependencies for the backend (API)
    ```
    ; cd api
@@ -205,14 +142,4 @@ at all.
    ; JWT_SECRET=SUPER_SECRET npm start
    ```
 
-## MongoDB Connection Errors?
 
-Some people occasionally experience MongoDB connection errors when running the
-tests or trying to use the application. Here are some tips which might help
-resolve such issues.
-
-- Check that MongoDB is installed using `mongo --version`
-- Check that it's running using `brew services list`
-
-If you have issues that are not resolved by these tips, please reach out to a
-coach and, once the issue is resolved, we can add a new tip!
