@@ -6,7 +6,7 @@ const { ObjectId } = require("mongodb");
 const PostsController = {
 
   Index: async (req, res) => {
-    const user = await findUser(req.user_id)  // method further down
+    const user = await findUser(req.user_id)  
 
     Post.find(async (err, posts) => {
       if (err) { throw err }
@@ -17,7 +17,7 @@ const PostsController = {
   },
 
   Create: async (req, res) => {
-    const post = await buildPostData(req) // method further down
+    const post = await buildPostData(req) 
 
     post.save(async (err) => {
       if (err) { throw err }
@@ -38,16 +38,16 @@ const PostsController = {
 
   GetPostOwnerData: async (req, res) => {
     try {
-      const userId = req.params.ownerId; // ID do usuário passado na URL
+      const userId = req.params.ownerId;
       
-      // Encontra todos os posts criados pelo usuário com o ID fornecido
+
       const posts = await Post.find({ createdBy: userId }).sort({ createdAt: -1 });
   
       if (!posts) {
         return res.status(404).json({ message: 'No posts found for this user' });
       }
   
-      // Gera um novo token (caso seja necessário para a autenticação)
+  
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
   
       res.status(200).json({ posts: posts, token: token });
@@ -92,17 +92,15 @@ const PostsController = {
     try {
       const post = await Post.findById(req.params.postId);
   
-      // Verifica se o post existe
+
       if (!post) {
         return res.status(404).json({ message: 'Post not found' });
       }
   
-      // Verifica se o usuário autenticado é o autor do post
       if (post.createdBy.toString() !== req.user_id) {
         return res.status(403).json({ message: 'You are not authorized to delete this post' });
       }
   
-      // Se for o autor, deleta o post
       await Post.findByIdAndDelete(req.params.postId);
       return res.status(200).json({ message: 'Post deleted successfully' });
   
@@ -126,11 +124,11 @@ const buildPostData = async (req) => {
   const post = new Post();
   const user = await findUser(req.user_id);
   
-  post.createdBy = user._id;  // Atribui o ID do usuário
+  post.createdBy = user._id;  
   post.message = req.body.message;
   post.image = req.body.publicID;
-  post.username = user.username;  // Atribui o username
-  post.avatar = user.avatar;  // Atribui o avatar
+  post.username = user.username;  
+  post.avatar = user.avatar;  
 
   return post
 }

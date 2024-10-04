@@ -15,15 +15,15 @@
 
     GetAvatar: (req, res) => {
       const filename = req.params.filename;
-    const filePath = path.join(__dirname, '..', 'Api', 'upload', filename); // Caminho ajustado
+    const filePath = path.join(__dirname, '..', 'Api', 'upload', filename); 
 
-    // Verifica se o arquivo existe
+
     fs.access(filePath, fs.constants.F_OK, (err) => {
       if (err) {
         return res.status(404).json({ message: 'File not found' });
       }
 
-      // Envia o arquivo como resposta
+
       res.sendFile(filePath, (err) => {
         if (err) {
           console.error(err);
@@ -48,9 +48,9 @@
     
             const newUser = new User(req.body);
     
-            // Verifique se um arquivo foi enviado e atribua o avatar
+
             if (req.file) {
-              newUser.avatar = `/uploads/${req.file.filename}`; // Ajuste o caminho conforme necessário
+              newUser.avatar = `/uploads/${req.file.filename}`; 
             }
     
             newUser.save((err) => {
@@ -82,18 +82,17 @@
               return res.status(404).json({ message: 'User not found' });
           }
 
-          // Atualiza a imagem se um novo arquivo foi enviado
           if (req.file) {
-              currentUser.avatar = `/uploads/${req.file.filename}`; // Corrigido aqui
+              currentUser.avatar = `/uploads/${req.file.filename}`; 
           }
 
-          // Atualiza a senha se fornecida
+        
           if (req.body.password) {
               const saltRounds = 10;
               currentUser.password = await bcrypt.hash(req.body.password, saltRounds);
           }
 
-          // Atualiza email e nome de usuário se fornecidos
+
           if (req.body.email) {
               currentUser.email = req.body.email;
           }
@@ -120,7 +119,6 @@
         return res.status(404).json({ message: 'User not found' });
       }
 
-      // Verifica se o amigo já foi adicionado
       if (user.friends.includes(req.params.friendId)) {
         return res.status(400).json({ message: 'Friend already added' });
       }
@@ -143,12 +141,12 @@
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Verifica se o amigo está na lista de amigos
+
         if (!user.friends.includes(mongoose.Types.ObjectId(friendId))) {
             return res.status(400).json({ message: 'Friend not found in the friend list' });
         }
 
-        // Remove o amigo da lista
+      
         user.friends = user.friends.filter(friend => friend.toString() !== friendId);
         await user.save();
 
@@ -175,7 +173,7 @@
     }
   },
 
-  // Listar todos os usuários
+  
   GetAllUsers: async (req, res) => {
     try {
       const users = await User.find({}, 'username email avatar');

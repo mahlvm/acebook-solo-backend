@@ -23,11 +23,11 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  username: {  // Novo campo
+  username: {  
     type: String,
     required: true,
   },
-  avatar: {  // Novo campo
+  avatar: { 
     type: String,
     required: true,
   }

@@ -7,7 +7,7 @@ const { ObjectId } = require("mongodb");
 const CommentsController = {
   
   Create: async (req, res) => {
-    const comment = await buildCommentData(req) // method further down
+    const comment = await buildCommentData(req)
 
     comment.save(async (err) => {
       if (err) { throw err }
@@ -63,21 +63,19 @@ const CommentsController = {
   Delete: async (req, res) => {
     try {
       const commentId = req.params.commentId;
-      const userId = req.user_id; // Supondo que o userId vem do token após a autenticação
-
-      // Busca o comentário pelo ID
+      const userId = req.user_id; 
+      
       const comment = await Comment.findById(commentId);
 
       if (!comment) {
         return res.status(404).json({ message: "Comment not found" });
       }
 
-      // Verifica se o usuário é o autor do comentário
       if (comment.createdBy.toString() !== userId) {
         return res.status(403).json({ message: "You are not authorized to delete this comment" });
       }
 
-      // Deleta o comentário se o usuário for o autor
+  
       await Comment.findByIdAndDelete(commentId);
 
       res.status(200).json({ message: "Comment deleted successfully" });
@@ -113,15 +111,15 @@ const retrieveImgData = (req) => {
 }
 
 const buildCommentData = async (req) => {
-  const user = await findUser(req.user_id);  // Busca o usuário pelo ID
-  const post = await Post.findById(req.params.postId);  // Busca o post
+  const user = await findUser(req.user_id);  
+  const post = await Post.findById(req.params.postId);  
 
   const comment = new Comment({
-    createdBy: user._id,  // Salva o ID do usuário
-    username: user.username,  // Salva o nome de usuário
-    avatar: user.avatar,  // Salva o avatar do usuário
-    message: req.body.comment,  // Salva o comentário
-    postId: post._id,  // Associa ao post
+    createdBy: user._id,  
+    username: user.username,  
+    avatar: user.avatar,  
+    message: req.body.comment,  
+    postId: post._id,  
   });
 
   return comment;

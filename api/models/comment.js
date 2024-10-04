@@ -6,13 +6,13 @@ const { ObjectID } = require("mongodb");
 const CommentSchema = new mongoose.Schema({
   postId: { 
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post',  // Associa o modelo Post
+    ref: 'Post',  
     immutable: true,
   },
   message: { type: String },
   createdBy: { 
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',  // Associa o modelo User
+    ref: 'User', 
     immutable: true,
   },
   username: {

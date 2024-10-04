@@ -20,7 +20,7 @@ const SessionsController = {
               res.status(402).json({ message: 'Incorrect password' });
             } else {
               const token = await TokenGenerator.jsonwebtoken(user.id);
-              // Adicionar o userId na resposta
+            
               res.status(201).json({ token: token, userId: user.id, username: user.username, email: user.email, avatar: user.avatar, message: "OK" });
             }
           });
