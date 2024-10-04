@@ -108,9 +108,7 @@ change the value of that environment variable to anything you like.
 
 ### Set up your project
 
-:warning: Make sure that your backend server (in `./api`) is running so that you
-can interact with it from your Mobile App.
-
+:warning: Make sure that your backend server (in `./api`)
 
 1. Clone this project to your local machine.
 2. Install Node.js dependencies for the backend (API)
