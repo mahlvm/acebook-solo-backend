@@ -23,7 +23,7 @@ Here's a quick overview of the API endpoints you'll be interacting with:
 | http://127.0.0.1:8080/comments/:postId                    | POST   | Create a new comment     |
 | http://127.0.0.1:8080/comments/:postId                    | GET    | Fetch comments by post   |
 | http://127.0.0.1:8080/comments/:commentId/like            | PUT    | Like comment             |
-| http://127.0.0.1:8080/comments//:commentId"               | DELETE | Delete comment           |
+| http://127.0.0.1:8080/comments//:commentId                | DELETE | Delete comment           |
 
 
 
